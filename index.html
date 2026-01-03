@@ -47,16 +47,46 @@
             align-items: center;
             justify-content: center;
             font-size: 50px;
+            animation: iconFloat 3s ease-in-out infinite;
+            transition: all 0.3s ease;
+        }
+
+        .icon:hover {
+            transform: scale(1.1) rotate(5deg);
+            background: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        @keyframes iconFloat {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-15px);
+            }
         }
 
         h1 {
             font-size: 2.5em;
             margin-bottom: 10px;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .subtitle {
             font-size: 1.1em;
             opacity: 0.9;
+            animation: fadeInUp 1s ease-out 0.2s both;
         }
 
         .content {
@@ -324,11 +354,6 @@
             <a href="https://wa.me/5491166232997?text=Hola%20Felipe,%20necesito%20ayuda%20con%20mi%20computadora" class="button" style="text-decoration: none;">
                 💬 Pedime tu presupuesto sin cargo
             </a>
-
-            <div style="margin-top: 20px; padding: 20px; background: #f8f9fa; border-radius: 12px; text-align: center;">
-                <p style="color: #2c3e50; margin-bottom: 10px;"><strong>📱 Teléfono:</strong> +54 9 11 6623-2997</p>
-                <p style="color: #2c3e50;"><strong>📧 Email:</strong> feloaiza@outlook.com</p>
-            </div>
         </div>
     </div>
 </body>
