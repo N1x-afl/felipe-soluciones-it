@@ -13,7 +13,7 @@
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            background: linear-gradient(135deg, #1e3a5f 0%, #2d4a6f 100%);
+            background: #f5f5f5;
             min-height: 100vh;
             display: flex;
             justify-content: center;
@@ -24,17 +24,33 @@
         .container {
             background: white;
             border-radius: 16px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
             max-width: 700px;
             width: 100%;
             overflow: hidden;
         }
 
         .header {
-            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            background: #000;
             color: white;
             padding: 60px 40px;
             text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #particles-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
         }
 
         .icon {
@@ -49,12 +65,13 @@
             font-size: 50px;
             animation: iconFloat 3s ease-in-out infinite;
             transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
         }
 
         .icon:hover {
             transform: scale(1.1) rotate(5deg);
             background: rgba(255, 255, 255, 0.2);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.3);
         }
 
         @keyframes iconFloat {
@@ -94,7 +111,7 @@
         }
 
         .alert {
-            background: #2c3e50;
+            background: #000;
             color: white;
             padding: 20px 25px;
             border-radius: 12px;
@@ -120,7 +137,8 @@
             align-items: center;
             gap: 15px;
             padding: 20px;
-            background: #f8f9fa;
+            background: #f8f8f8;
+            border: 2px solid #e0e0e0;
             border-radius: 12px;
             transition: all 0.3s ease;
             cursor: pointer;
@@ -129,7 +147,8 @@
         }
 
         .option:hover {
-            background: #e9ecef;
+            background: #fff;
+            border-color: #000;
             transform: translateX(5px);
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
@@ -141,7 +160,7 @@
             top: 0;
             height: 100%;
             width: 4px;
-            background: #3498db;
+            background: #000;
             transform: scaleY(0);
             transition: transform 0.3s ease;
         }
@@ -150,7 +169,6 @@
             transform: scaleY(1);
         }
 
-        /* Animaciones para los emojis */
         @keyframes slideInBounce {
             0% {
                 transform: translateX(-100px) scale(0.5);
@@ -203,7 +221,6 @@
             animation-fill-mode: both;
         }
 
-        /* Retrasos escalonados para cada emoji */
         .option:nth-child(1) .emoji {
             animation-delay: 0.1s;
         }
@@ -220,36 +237,32 @@
             animation-delay: 0.4s;
         }
 
-        /* Animaciones en hover específicas para cada emoji */
         .option:hover .emoji {
             animation: float 1s ease-in-out infinite;
         }
 
-        /* Animación especial para el emoji de fuego */
         .option:nth-child(4):hover .emoji {
             animation: pulse 0.6s ease-in-out infinite;
         }
 
-        /* Animación especial para el emoji de tortuga */
         .option:nth-child(2):hover .emoji {
             animation: none;
             transform: scale(1.2);
             transition: transform 0.3s ease;
         }
 
-        /* Animación especial para el ventilador */
         .option:nth-child(3):hover .emoji {
             animation: rotate 2s linear infinite;
         }
 
         .option-text {
             font-size: 1.1em;
-            color: #2c3e50;
+            color: #000;
             flex: 1;
         }
 
         .cta {
-            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+            background: #000;
             color: white;
             padding: 25px;
             border-radius: 12px;
@@ -265,7 +278,8 @@
 
         .cta:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(231, 76, 60, 0.3);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            background: #1a1a1a;
         }
 
         .cta-emoji {
@@ -274,7 +288,7 @@
         }
 
         .button {
-            background: #2c3e50;
+            background: #000;
             color: white;
             border: none;
             padding: 18px 40px;
@@ -287,12 +301,13 @@
             justify-content: center;
             gap: 10px;
             width: 100%;
+            text-decoration: none;
         }
 
         .button:hover {
-            background: #34495e;
+            background: #1a1a1a;
             transform: translateY(-2px);
-            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
         }
 
         @media (max-width: 600px) {
@@ -313,9 +328,12 @@
 <body>
     <div class="container">
         <div class="header">
-            <div class="icon">💻</div>
-            <h1>Felipe Soluciones IT</h1>
-            <p class="subtitle">Servicio técnico profesional y confiable</p>
+            <canvas id="particles-canvas"></canvas>
+            <div class="header-content">
+                <div class="icon">💻</div>
+                <h1>Felipe Soluciones IT</h1>
+                <p class="subtitle">Servicio técnico profesional y confiable</p>
+            </div>
         </div>
 
         <div class="content">
@@ -351,10 +369,89 @@
                 <strong>¡Dejala en mis manos y volvé a disfrutar tu PC como nueva!</strong>
             </div>
 
-            <a href="https://wa.me/5491166232997?text=Hola%20Felipe,%20necesito%20ayuda%20con%20mi%20computadora" class="button" style="text-decoration: none;">
+            <a href="https://wa.me/5491166232997?text=Hola%20Felipe,%20necesito%20ayuda%20con%20mi%20computadora" class="button">
                 💬 Pedime tu presupuesto sin cargo
             </a>
         </div>
     </div>
+
+    <script>
+        // Efecto de red de partículas en el header
+        const canvas = document.getElementById('particles-canvas');
+        const ctx = canvas.getContext('2d');
+
+        canvas.width = canvas.offsetWidth;
+        canvas.height = canvas.offsetHeight;
+
+        const particles = [];
+        const particleCount = 50;
+        const maxDistance = 120;
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.vx = (Math.random() - 0.5) * 0.5;
+                this.vy = (Math.random() - 0.5) * 0.5;
+                this.radius = Math.random() * 2 + 1;
+            }
+
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+
+                if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+                if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+            }
+
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.fillStyle = 'rgba(255, 255, 255, 0.5)';
+                ctx.fill();
+            }
+        }
+
+        for (let i = 0; i < particleCount; i++) {
+            particles.push(new Particle());
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            particles.forEach(particle => {
+                particle.update();
+                particle.draw();
+            });
+
+            // Dibujar líneas entre partículas cercanas
+            for (let i = 0; i < particles.length; i++) {
+                for (let j = i + 1; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+
+                    if (distance < maxDistance) {
+                        ctx.beginPath();
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.strokeStyle = `rgba(255, 255, 255, ${0.2 * (1 - distance / maxDistance)})`;
+                        ctx.lineWidth = 1;
+                        ctx.stroke();
+                    }
+                }
+            }
+
+            requestAnimationFrame(animate);
+        }
+
+        animate();
+
+        // Redimensionar canvas al cambiar tamaño de ventana
+        window.addEventListener('resize', () => {
+            canvas.width = canvas.offsetWidth;
+            canvas.height = canvas.offsetHeight;
+        });
+    </script>
 </body>
 </html>
