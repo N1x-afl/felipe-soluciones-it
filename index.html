@@ -15,30 +15,48 @@
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
             background: linear-gradient(135deg, #000 0%, #1a1a1a 50%, #2d2d2d 100%);
             min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
+            margin: 0;
+            padding: 0;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Canvas de partículas que cubre toda la página */
+        #particles-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
         }
 
         .container {
             background: transparent;
-            border-radius: 16px;
-            max-width: 700px;
+            max-width: 100%;
             width: 100%;
+            min-height: 100vh;
             overflow: visible;
+            position: relative;
+            z-index: 1;
         }
 
         .header {
-            background: rgba(0, 0, 0, 0.8);
+            background: rgba(0, 0, 0, 0.5);
             backdrop-filter: blur(10px);
             color: white;
-            padding: 60px 40px;
+            padding: 80px 40px;
             text-align: center;
             position: relative;
             overflow: hidden;
-            border-radius: 16px 16px 0 0;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: none;
+            width: 100%;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
         }
 
         #particles-canvas {
@@ -109,12 +127,12 @@
         }
 
         .content {
-            padding: 40px;
+            padding: 60px 20px;
             background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(10px);
-            border-radius: 0 0 16px 16px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-top: none;
+            border: none;
+            max-width: 800px;
+            margin: 0 auto;
         }
 
         .alert {
@@ -328,7 +346,7 @@
 
         @media (max-width: 600px) {
             .header {
-                padding: 40px 20px;
+                padding: 60px 20px;
             }
 
             h1 {
@@ -336,15 +354,31 @@
             }
 
             .content {
-                padding: 30px 20px;
+                padding: 40px 20px;
             }
+        }
+
+        /* Efecto de resplandor sutil en el fondo */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.03) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.03) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
         }
     </style>
 </head>
 <body>
+    <!-- Canvas de partículas que cubre toda la página -->
+    <canvas id="particles-canvas"></canvas>
+    
     <div class="container">
         <div class="header">
-            <canvas id="particles-canvas"></canvas>
             <div class="header-content">
                 <div class="icon">💻</div>
                 <h1>Felipe Soluciones IT</h1>
@@ -392,16 +426,21 @@
     </div>
 
     <script>
-        // Efecto de red de partículas en el header
+        // Efecto de red de partículas que cubre TODA LA PÁGINA
         const canvas = document.getElementById('particles-canvas');
         const ctx = canvas.getContext('2d');
 
-        canvas.width = canvas.offsetWidth;
-        canvas.height = canvas.offsetHeight;
+        // Ajustar canvas al tamaño completo de la ventana
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = Math.max(document.documentElement.scrollHeight, window.innerHeight);
+        }
+        
+        resizeCanvas();
 
         const particles = [];
-        const particleCount = 50;
-        const maxDistance = 120;
+        const particleCount = 80; // Más partículas para cubrir toda la página
+        const maxDistance = 150;
 
         class Particle {
             constructor() {
@@ -463,10 +502,10 @@
 
         animate();
 
-        // Redimensionar canvas al cambiar tamaño de ventana
-        window.addEventListener('resize', () => {
-            canvas.width = canvas.offsetWidth;
-            canvas.height = canvas.offsetHeight;
+        // Redimensionar canvas al cambiar tamaño de ventana o al hacer scroll
+        window.addEventListener('resize', resizeCanvas);
+        window.addEventListener('scroll', () => {
+            canvas.height = Math.max(document.documentElement.scrollHeight, window.innerHeight);
         });
     </script>
 </body>
