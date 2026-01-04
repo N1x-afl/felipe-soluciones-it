@@ -53,17 +53,6 @@
             width: 100%;
         }
 
-        /* Canvas para el efecto Matrix en el header */
-        #matrix-canvas {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1;
-            opacity: 0.2;
-        }
-
         .header-content {
             position: relative;
             z-index: 2;
@@ -388,8 +377,6 @@
     
     <div class="container">
         <div class="header">
-            <!-- Canvas para efecto Matrix en el header -->
-            <canvas id="matrix-canvas"></canvas>
             <div class="header-content">
                 <div class="icon">💻</div>
                 <h1>Felipe Soluciones IT</h1>
@@ -437,56 +424,7 @@
     </div>
 
     <script>
-        // ===== EFECTO MATRIX EN EL HEADER =====
-        const matrixCanvas = document.getElementById('matrix-canvas');
-        const matrixCtx = matrixCanvas.getContext('2d');
-
-        function resizeMatrixCanvas() {
-            matrixCanvas.width = matrixCanvas.offsetWidth;
-            matrixCanvas.height = matrixCanvas.offsetHeight;
-        }
-        
-        resizeMatrixCanvas();
-
-        // Caracteres para el efecto Matrix (números binarios y algunos símbolos)
-        const matrixChars = '01';
-        const fontSize = 14;
-        const columns = matrixCanvas.width / fontSize;
-        const drops = [];
-
-        // Inicializar las gotas
-        for (let i = 0; i < columns; i++) {
-            drops[i] = Math.random() * -100;
-        }
-
-        function drawMatrix() {
-            // Fondo semi-transparente para el efecto de rastro
-            matrixCtx.fillStyle = 'rgba(0, 0, 0, 0.05)';
-            matrixCtx.fillRect(0, 0, matrixCanvas.width, matrixCanvas.height);
-
-            // Texto verde estilo Matrix
-            matrixCtx.fillStyle = '#0F0';
-            matrixCtx.font = fontSize + 'px monospace';
-
-            for (let i = 0; i < drops.length; i++) {
-                const text = matrixChars[Math.floor(Math.random() * matrixChars.length)];
-                const x = i * fontSize;
-                const y = drops[i] * fontSize;
-
-                matrixCtx.fillText(text, x, y);
-
-                // Reiniciar la gota cuando llega al final
-                if (y > matrixCanvas.height && Math.random() > 0.975) {
-                    drops[i] = 0;
-                }
-
-                drops[i]++;
-            }
-        }
-
-        setInterval(drawMatrix, 50);
-
-        // ===== EFECTO DE RED DE PARTÍCULAS QUE CUBRE TODA LA PÁGINA =====
+        // Efecto de red de partículas que cubre TODA LA PÁGINA
         const canvas = document.getElementById('particles-canvas');
         const ctx = canvas.getContext('2d');
 
@@ -563,10 +501,7 @@
         animate();
 
         // Redimensionar canvas al cambiar tamaño de ventana
-        window.addEventListener('resize', () => {
-            resizeCanvas();
-            resizeMatrixCanvas();
-        });
+        window.addEventListener('resize', resizeCanvas);
     </script>
 </body>
 </html>
