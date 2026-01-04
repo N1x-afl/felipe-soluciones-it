@@ -13,7 +13,7 @@
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            background: #f5f5f5;
+            background: linear-gradient(135deg, #000 0%, #1a1a1a 50%, #2d2d2d 100%);
             min-height: 100vh;
             display: flex;
             justify-content: center;
@@ -22,21 +22,23 @@
         }
 
         .container {
-            background: white;
+            background: transparent;
             border-radius: 16px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
             max-width: 700px;
             width: 100%;
-            overflow: hidden;
+            overflow: visible;
         }
 
         .header {
-            background: #000;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
             color: white;
             padding: 60px 40px;
             text-align: center;
             position: relative;
             overflow: hidden;
+            border-radius: 16px 16px 0 0;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         #particles-canvas {
@@ -108,17 +110,24 @@
 
         .content {
             padding: 40px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 0 0 16px 16px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-top: none;
         }
 
         .alert {
-            background: #000;
-            color: white;
+            background: rgba(255, 255, 255, 0.95);
+            color: #000;
             padding: 20px 25px;
             border-radius: 12px;
             margin-bottom: 30px;
             display: flex;
             align-items: center;
             gap: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
         }
 
         .alert-icon {
@@ -137,20 +146,21 @@
             align-items: center;
             gap: 15px;
             padding: 20px;
-            background: #f8f8f8;
-            border: 2px solid #e0e0e0;
+            background: rgba(255, 255, 255, 0.9);
+            border: 2px solid rgba(255, 255, 255, 0.2);
             border-radius: 12px;
             transition: all 0.3s ease;
             cursor: pointer;
             position: relative;
             overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
         }
 
         .option:hover {
-            background: #fff;
-            border-color: #000;
+            background: rgba(255, 255, 255, 1);
+            border-color: #fff;
             transform: translateX(5px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 8px 25px rgba(255, 255, 255, 0.3);
         }
 
         .option::before {
@@ -160,7 +170,7 @@
             top: 0;
             height: 100%;
             width: 4px;
-            background: #000;
+            background: linear-gradient(180deg, #fff 0%, #ddd 100%);
             transform: scaleY(0);
             transition: transform 0.3s ease;
         }
@@ -262,8 +272,8 @@
         }
 
         .cta {
-            background: #000;
-            color: white;
+            background: linear-gradient(135deg, #fff 0%, #f0f0f0 100%);
+            color: #000;
             padding: 25px;
             border-radius: 12px;
             text-align: center;
@@ -274,12 +284,15 @@
             align-items: center;
             justify-content: center;
             gap: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            border: 2px solid rgba(255, 255, 255, 0.3);
         }
 
         .cta:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-            background: #1a1a1a;
+            box-shadow: 0 8px 30px rgba(255, 255, 255, 0.4);
+            background: linear-gradient(135deg, #fff 0%, #fff 100%);
+            border-color: #fff;
         }
 
         .cta-emoji {
@@ -288,12 +301,13 @@
         }
 
         .button {
-            background: #000;
-            color: white;
-            border: none;
+            background: linear-gradient(135deg, #fff 0%, #f0f0f0 100%);
+            color: #000;
+            border: 2px solid rgba(255, 255, 255, 0.3);
             padding: 18px 40px;
             border-radius: 12px;
             font-size: 1.1em;
+            font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
             display: flex;
@@ -302,12 +316,14 @@
             gap: 10px;
             width: 100%;
             text-decoration: none;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
         }
 
         .button:hover {
-            background: #1a1a1a;
+            background: linear-gradient(135deg, #fff 0%, #fff 100%);
             transform: translateY(-2px);
-            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 8px 30px rgba(255, 255, 255, 0.4);
+            border-color: #fff;
         }
 
         @media (max-width: 600px) {
