@@ -41,15 +41,24 @@
             z-index: 10; 
         }
 
-        /* --- NOTEBOOK 3D (Efecto apertura) --- */
+        /* --- CONTENEDOR DE ENCABEZADO (Apilado vertical) --- */
+        header { 
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center; 
+            margin-bottom: 60px; 
+        }
+
+        /* --- NOTEBOOK 3D (Efecto apertura encima del texto) --- */
         .laptop-container {
             perspective: 1000px;
-            margin-bottom: 20px;
-            display: inline-block;
+            margin-bottom: 25px; /* Espacio entre la notebook y el título */
+            display: block;
         }
 
         .fa-laptop {
-            font-size: 5rem;
+            font-size: 5.5rem; /* Un poco más grande para que destaque */
             color: var(--accent);
             animation: laptopAction 4s ease-in-out infinite alternate;
             filter: drop-shadow(0 0 20px rgba(255, 180, 0, 0.6));
@@ -60,8 +69,6 @@
             100% { transform: rotateX(0deg) rotateY(5deg); }
         }
 
-        header { text-align: center; margin-bottom: 60px; }
-        
         /* --- TÍTULO ZOOM IN --- */
         .hero-title { 
             font-size: clamp(2.2rem, 8vw, 3.8rem);
@@ -71,7 +78,6 @@
             font-weight: 800;
             text-transform: uppercase;
             margin: 0;
-            display: inline-block;
             animation: zoomFromFront 1.5s cubic-bezier(0.34, 1.56, 0.64, 1) both;
         }
 
@@ -150,7 +156,7 @@
             <i class="fa-solid fa-laptop"></i>
         </div>
         <h1 class="hero-title">Felipe Soluciones IT</h1>
-        <p style="color: #888; margin-top: 10px;">Soporte Técnico Especializado | Buenos Aires</p>
+        <p style="color: #888; margin-top: 15px;">Soporte Técnico Especializado | Buenos Aires</p>
     </header>
 
     <div class="services">
@@ -165,7 +171,7 @@
         </div>
         <div class="card">
             <h3>🔧 Mantenimiento</h3>
-            <p>Limpieza profunda y cambio de pasta térmica.</p>
+            <p>Limpieza profunda y cambio de pasta térmica profesional.</p>
         </div>
     </div>
 
@@ -201,70 +207,4 @@
         constructor() {
             this.x = Math.random() * canvas.width;
             this.y = Math.random() * canvas.height;
-            this.vx = (Math.random() - 0.5) * 0.7;
-            this.vy = (Math.random() - 0.5) * 0.7;
-            this.size = Math.random() * 3 + 1;
-        }
-        update() {
-            this.x += this.vx; this.y += this.vy;
-            if(this.x < 0 || this.x > canvas.width) this.vx *= -1;
-            if(this.y < 0 || this.y > canvas.height) this.vy *= -1;
-        }
-        draw() {
-            ctx.fillStyle = 'rgba(255, 180, 0, 0.8)';
-            ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI*2); ctx.fill();
-        }
-    }
-    for(let i=0; i<75; i++) particles.push(new Particle());
-    function animate() {
-        ctx.clearRect(0,0,canvas.width, canvas.height);
-        particles.forEach(p => { p.update(); p.draw(); });
-        requestAnimationFrame(animate);
-    }
-    animate();
-
-    // --- ENVÍO POR AJAX ---
-    const form = document.getElementById("serviceForm");
-    const status = document.getElementById("form-status");
-    const btn = document.getElementById("submit-btn");
-
-    form.addEventListener("submit", async function(event) {
-      event.preventDefault();
-      btn.disabled = true;
-      btn.innerText = "Enviando...";
-      const data = new FormData(event.target);
-      fetch("https://formspree.io/f/mpqdakpy", {
-        method: "POST",
-        body: data,
-        headers: { 'Accept': 'application/json' }
-      }).then(response => {
-        if (response.ok) {
-          status.innerHTML = "¡Su mensaje fue enviado con éxito!";
-          status.className = "success";
-          form.reset();
-          btn.innerText = "Enviar Solicitud";
-          btn.disabled = false;
-        } else {
-          status.innerHTML = "Hubo un error. Por favor, reintente.";
-          status.className = "error";
-        }
-      }).catch(() => {
-        status.innerHTML = "Error de conexión.";
-        status.className = "error";
-      });
-    });
-</script>
-
-<script type="text/javascript">
-var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-(function(){
-var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-s1.async=true;
-s1.src='https://embed.tawk.to/697679661b8e46197d9d1c96/1jfrckest';
-s1.charset='UTF-8';
-s1.setAttribute('crossorigin','*');
-s0.parentNode.insertBefore(s1,s0);
-})();
-</script>
-</body>
-</html>
+            this.vx = (Math.random() - 0.5) *
