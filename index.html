@@ -23,6 +23,7 @@
             overflow-x: hidden;
         }
 
+        /* FONDO DE PARTÍCULAS DORADAS */
         #particles-canvas {
             position: fixed;
             top: 0; left: 0;
@@ -39,6 +40,7 @@
             z-index: 10; 
         }
 
+        /* ANIMACIÓN NOTEBOOK 3D (Se mantiene abriéndose) */
         .laptop-container {
             perspective: 1000px;
             margin-bottom: 20px;
@@ -59,6 +61,7 @@
 
         header { text-align: center; margin-bottom: 60px; }
         
+        /* --- NUEVO EFECTO: ENTRADA DESDE EL FRENTE --- */
         .hero-title { 
             font-size: clamp(2.2rem, 8vw, 3.8rem);
             background: linear-gradient(to right, #fff, var(--accent));
@@ -67,8 +70,24 @@
             font-weight: 800;
             text-transform: uppercase;
             margin: 0;
+            display: inline-block;
+            animation: zoomFromFront 1.5s cubic-bezier(0.34, 1.56, 0.64, 1) both;
         }
 
+        @keyframes zoomFromFront {
+            0% {
+                transform: scale(0.5) translateZ(-500px);
+                opacity: 0;
+                filter: blur(10px);
+            }
+            100% {
+                transform: scale(1) translateZ(0);
+                opacity: 1;
+                filter: blur(0);
+            }
+        }
+
+        /* TARJETAS DE SERVICIO */
         .services {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -121,20 +140,13 @@
         .btn-rustdesk { background: rgba(59, 130, 246, 0.15); border: 1px solid var(--rustdesk-blue); }
         .btn-rustdesk:hover { background: var(--rustdesk-blue); box-shadow: 0 0 15px rgba(59, 130, 246, 0.4); }
 
+        /* FORMULARIO */
         .contact-box {
             background: rgba(255,255,255,0.02);
             border: 1px solid rgba(255,255,255,0.1);
             padding: 40px;
             border-radius: 25px;
             box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-        }
-
-        .nota-hardware {
-            font-size: 0.85rem;
-            color: #888;
-            margin-top: 15px;
-            font-style: italic;
-            text-align: center;
         }
 
         input, select, textarea {
@@ -165,7 +177,9 @@
         <div class="laptop-container">
             <i class="fa-solid fa-laptop"></i>
         </div>
-        <h1 class="hero-title">Felipe Soluciones IT</h1>
+        <div>
+            <h1 class="hero-title">Felipe Soluciones IT</h1>
+        </div>
         <p style="color: #888; margin-top: 10px;">Servicio Técnico Profesional y Confiable</p>
     </header>
 
@@ -219,6 +233,7 @@
 </div>
 
 <script>
+    // --- LÓGICA DE PARTÍCULAS DORADAS ---
     const canvas = document.getElementById('particles-canvas');
     const ctx = canvas.getContext('2d');
     let particles = [];
@@ -274,6 +289,7 @@
     }
     animate();
 
+    // --- ENVÍO DOBLE ---
     document.getElementById('serviceForm').addEventListener('submit', function(e) {
         const name = document.getElementById('name').value;
         const service = document.getElementById('service').value;
