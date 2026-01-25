@@ -13,6 +13,7 @@
             --border: rgba(255, 180, 0, 0.4);
             --anydesk-red: #ef4444;
             --rustdesk-blue: #3b82f6;
+            --success: #28a745;
         }
 
         body {
@@ -94,18 +95,13 @@
 
         .card:hover { border-color: #fff; transform: translateY(-10px); }
 
-        .download-links { display: flex; flex-direction: column; gap: 10px; margin-top: 15px; }
-        
         .btn-dl {
             padding: 10px; border-radius: 8px; text-decoration: none; color: white;
-            font-size: 0.85rem; text-align: center; transition: 0.3s;
+            font-size: 0.85rem; text-align: center; transition: 0.3s; display: block; margin-top: 10px;
         }
 
         .btn-anydesk { border: 1px solid var(--anydesk-red); background: rgba(239, 68, 68, 0.1); }
-        .btn-anydesk:hover { background: var(--anydesk-red); }
-
         .btn-rustdesk { border: 1px solid var(--rustdesk-blue); background: rgba(59, 130, 246, 0.1); }
-        .btn-rustdesk:hover { background: var(--rustdesk-blue); }
 
         .contact-box {
             background: rgba(255,255,255,0.02);
@@ -124,6 +120,30 @@
             background: var(--accent); color: black; font-weight: 800;
             width: 100%; padding: 20px; border: none; border-radius: 12px;
             margin-top: 25px; cursor: pointer; text-transform: uppercase;
+        }
+
+        /* ESTILO DEL MENSAJE DE ÉXITO */
+        #form-status {
+            display: none;
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 12px;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        #form-status.success {
+            display: block;
+            background: rgba(40, 167, 69, 0.2);
+            border: 1px solid var(--success);
+            color: #afffaf;
+        }
+
+        #form-status.error {
+            display: block;
+            background: rgba(220, 53, 69, 0.2);
+            border: 1px solid #dc3545;
+            color: #ffafaf;
         }
 
         .footer { text-align: center; margin-top: 50px; color: #666; font-size: 0.85rem; }
@@ -145,10 +165,8 @@
     <div class="services">
         <div class="card">
             <h3>⚡ Soporte Remoto</h3>
-            <div class="download-links">
-                <a href="https://download.anydesk.com/AnyDesk.exe" target="_blank" class="btn-dl btn-anydesk">Descargar AnyDesk</a>
-                <a href="https://github.com/rustdesk/rustdesk/releases/download/1.2.3-2/rustdesk-1.2.3-2-x86_64.exe" target="_blank" class="btn-dl btn-rustdesk">Descargar RustDesk</a>
-            </div>
+            <a href="https://download.anydesk.com/AnyDesk.exe" target="_blank" class="btn-dl btn-anydesk">Descargar AnyDesk</a>
+            <a href="https://github.com/rustdesk/rustdesk/releases/download/1.2.3-2/rustdesk-1.2.3-2-x86_64.exe" target="_blank" class="btn-dl btn-rustdesk">Descargar RustDesk</a>
         </div>
         <div class="card">
             <h3>💿 Formateo y Soft</h3>
@@ -162,7 +180,7 @@
 
     <section class="contact-box">
         <h2 style="text-align: center; margin-bottom: 20px;">Solicitar Presupuesto</h2>
-        <form id="serviceForm" action="https://formspree.io/f/mpqdakpy" method="POST">
+        <form id="serviceForm">
             <input type="text" name="nombre" placeholder="Tu nombre" required>
             <select name="servicio">
                 <option value="Formateo">Formateo e Instalación</option>
@@ -170,11 +188,9 @@
                 <option value="Limpieza">Mantenimiento Físico</option>
             </select>
             <textarea name="mensaje" rows="4" placeholder="Detalle del problema o consulta..." required></textarea>
-            
-            <input type="hidden" name="_replyto" value="feloaiza@outlook.com">
-            
-            <button type="submit" class="btn-send">Enviar Solicitud por Email</button>
+            <button type="submit" class="btn-send" id="submit-btn">Enviar Solicitud</button>
         </form>
+        <div id="form-status"></div>
     </section>
 
     <div class="footer">
@@ -183,7 +199,7 @@
 </div>
 
 <script>
-    // Animación de partículas doradas
+    // Partículas doradas
     const canvas = document.getElementById('particles-canvas');
     const ctx = canvas.getContext('2d');
     let particles = [];
@@ -215,6 +231,39 @@
         requestAnimationFrame(animate);
     }
     animate();
+
+    // ENVÍO POR AJAX (FORMULARIO)
+    const form = document.getElementById("serviceForm");
+    const status = document.getElementById("form-status");
+    const btn = document.getElementById("submit-btn");
+
+    form.addEventListener("submit", async function(event) {
+      event.preventDefault();
+      btn.disabled = true;
+      btn.innerText = "Enviando...";
+      
+      const data = new FormData(event.target);
+      
+      fetch("https://formspree.io/f/mpqdakpy", {
+        method: "POST",
+        body: data,
+        headers: { 'Accept': 'application/json' }
+      }).then(response => {
+        if (response.ok) {
+          status.innerHTML = "¡Su mensaje fue enviado con éxito!";
+          status.className = "success";
+          form.reset();
+          btn.innerText = "Enviar Solicitud";
+          btn.disabled = false;
+        } else {
+          status.innerHTML = "Hubo un error. Por favor, reintente.";
+          status.className = "error";
+        }
+      }).catch(error => {
+        status.innerHTML = "Error de conexión.";
+        status.className = "error";
+      });
+    });
 </script>
 
 <script type="text/javascript">
