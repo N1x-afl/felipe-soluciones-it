@@ -4,71 +4,79 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Felipe Soluciones IT | Soporte Profesional</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --accent: #ffb400; /* Dorado vibrante */
+            --accent: #ffb400; 
             --bg: #050505;
-            --glass: rgba(255, 255, 255, 0.03);
-            --border: rgba(255, 180, 0, 0.2);
-            --text-color: #e0e0e0;
+            --glass: rgba(255, 255, 255, 0.05);
+            --border: rgba(255, 180, 0, 0.4);
         }
 
         body {
-            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            font-family: 'Inter', system-ui, sans-serif;
             background-color: var(--bg);
-            color: var(--text-color);
+            color: white;
             margin: 0;
             overflow-x: hidden;
-            position: relative;
         }
 
-        /* --- Fondo de Partículas --- */
+        /* --- FONDO DE PARTÍCULAS MEJORADO --- */
         #particles-canvas {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -1;
-            opacity: 0.6; /* Un poco más de presencia */
+            z-index: 0;
+            background: radial-gradient(circle at center, #111 0%, #050505 100%);
         }
 
-        .container { max-width: 900px; margin: 0 auto; padding: 60px 20px; position: relative; z-index: 1; }
+        .container { 
+            max-width: 900px; 
+            margin: 0 auto; 
+            padding: 60px 20px; 
+            position: relative; 
+            z-index: 10; 
+        }
+
+        /* --- NOTEBOOK QUE SE ABRE (Animación 3D) --- */
+        .laptop-container {
+            perspective: 1000px;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+
+        .fa-laptop {
+            font-size: 5rem;
+            color: var(--accent);
+            animation: laptopOpenClose 3s ease-in-out infinite alternate;
+            filter: drop-shadow(0 0 15px rgba(255, 180, 0, 0.5));
+        }
+
+        @keyframes laptopOpenClose {
+            0% { transform: rotateX(50deg); } /* Casi cerrada */
+            100% { transform: rotateX(0deg); } /* Abierta */
+        }
 
         header { text-align: center; margin-bottom: 60px; }
+        
         .hero-title { 
             font-size: clamp(2.2rem, 8vw, 3.8rem);
-            margin: 0; 
             background: linear-gradient(to right, #fff, var(--accent));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             font-weight: 800;
             text-transform: uppercase;
-            animation: slideInRight 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
-            display: inline-block; /* Para el gradiente de texto */
+            animation: slideInRight 1s ease-out;
         }
 
         @keyframes slideInRight {
-            0% { transform: translateX(100px); opacity: 0; }
-            100% { transform: translateX(0); opacity: 1; }
+            from { transform: translateX(50px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
         }
 
-        /* --- Ícono de Notebook Animado --- */
-        .animated-laptop {
-            font-size: 5rem; /* Tamaño más grande para destacar */
-            display: inline-block;
-            margin-bottom: 20px;
-            animation: laptopOpen 3s ease-in-out infinite alternate;
-            color: #ccc; /* Color sutil */
-        }
-
-        @keyframes laptopOpen {
-            0% { transform: rotateX(0deg); opacity: 0.8; }
-            50% { transform: rotateX(10deg); opacity: 1; }
-            100% { transform: rotateX(0deg); opacity: 0.8; }
-        }
-
-        /* --- TARJETAS DE SERVICIO --- */
+        /* --- TARJETAS --- */
         .services {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -81,114 +89,53 @@
             border: 1px solid var(--border);
             border-radius: 20px;
             padding: 30px;
-            backdrop-filter: blur(12px);
-            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
-                        border-color 0.3s ease, 
-                        box-shadow 0.3s ease,
-                        opacity 0.6s ease-out,
-                        transform 0.6s ease-out; /* Para la animación en scroll */
-            opacity: 0; /* Por defecto ocultas */
-            transform: translateY(40px); /* Para la animación en scroll */
-        }
-
-        .card.visible {
-            opacity: 1;
-            transform: translateY(0);
+            backdrop-filter: blur(15px);
+            transition: 0.4s;
         }
 
         .card:hover {
-            border-color: var(--accent);
-            transform: translateY(-8px);
-            box-shadow: 0 15px 30px rgba(255, 180, 0, 0.15);
+            border-color: #fff;
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(255, 180, 0, 0.2);
         }
 
-        .card h3 { color: var(--accent); margin-bottom: 15px; font-size: 1.4rem; }
-        .card p { color: #ccc; font-size: 0.95rem; line-height: 1.5; }
-
-        .download-links {
-            display: flex;
-            gap: 10px;
-            margin-top: 15px;
-            flex-wrap: wrap;
-        }
-
-        .btn-download {
+        /* --- BOTONES DESCARGA --- */
+        .download-links { display: flex; gap: 10px; margin-top: 20px; }
+        .btn-dl {
             flex: 1;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
             padding: 10px;
             border-radius: 8px;
             text-decoration: none;
-            font-size: 0.85rem;
-            font-weight: 600;
-            transition: 0.3s;
-            border: 1px solid rgba(255,255,255,0.1);
             color: white;
-            background: rgba(255,255,255,0.05);
+            background: rgba(255,255,255,0.1);
+            font-size: 0.8rem;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: 0.3s;
         }
-
-        .btn-download:hover {
-            background: rgba(255,255,255,0.15);
-            border-color: white;
-            transform: translateY(-2px);
-        }
+        .btn-dl:hover { background: var(--accent); color: black; }
 
         /* --- FORMULARIO --- */
         .contact-box {
-            background: rgba(255,255,255,0.02);
-            border: 1px solid rgba(255,255,255,0.08);
-            border-radius: 24px;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.1);
             padding: 40px;
-            backdrop-filter: blur(8px);
-            opacity: 0; /* Para la animación en scroll */
-            transform: translateY(40px); /* Para la animación en scroll */
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-        }
-
-        .contact-box.visible {
-            opacity: 1;
-            transform: translateY(0);
+            border-radius: 25px;
         }
 
         input, select, textarea {
-            width: 100%;
-            padding: 15px;
-            margin-top: 8px;
-            background: #000;
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 12px;
-            color: white;
-            transition: 0.3s;
-            font-size: 1rem;
+            width: 100%; padding: 15px; margin-top: 10px;
+            background: rgba(0,0,0,0.6); border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px; color: white;
         }
-
-        input:focus, textarea:focus, select:focus { border-color: var(--accent); outline: none; box-shadow: 0 0 5px rgba(255, 180, 0, 0.4); }
 
         .btn-send {
-            background: var(--accent);
-            color: #000;
-            border: none;
-            padding: 18px;
-            width: 100%;
-            border-radius: 12px;
-            font-weight: 800;
-            cursor: pointer;
-            margin-top: 20px;
-            text-transform: uppercase;
-            transition: 0.3s;
+            background: var(--accent); color: black; font-weight: 800;
+            width: 100%; padding: 20px; border: none; border-radius: 12px;
+            margin-top: 20px; cursor: pointer; text-transform: uppercase;
         }
 
-        .btn-send:hover { filter: brightness(1.2); transform: scale(1.01); box-shadow: 0 0 25px rgba(255, 180, 0, 0.4); }
-
-        .footer { text-align: center; margin-top: 50px; color: #777; font-size: 0.9rem; }
-        .footer p { margin: 5px 0; }
-
-        @media (max-width: 600px) {
-            .hero-title { font-size: 2.5rem; }
-            .contact-box { padding: 25px; }
-            .animated-laptop { font-size: 4rem; }
-        }
+        .footer { text-align: center; margin-top: 40px; color: #777; font-size: 0.8rem; }
     </style>
 </head>
 <body>
@@ -197,165 +144,112 @@
 
 <div class="container">
     <header>
-        <div class="animated-laptop">💻</div> <h1 class="hero-title">Felipe Soluciones IT</h1>
-        <p style="color: #888; margin-top: 10px;">Soporte Técnico Profesional | Buenos Aires</p>
+        <div class="laptop-container">
+            <i class="fa-solid fa-laptop"></i>
+        </div>
+        <h1 class="hero-title">Felipe Soluciones IT</h1>
+        <p style="color: #aaa;">Soporte Técnico Profesional | Buenos Aires</p>
     </header>
 
     <div class="services">
         <div class="card">
-            <h3>⚡ Asistencia Remota</h3>
-            <p style="color: #ccc; font-size: 0.9rem;">Soluciones rápidas a distancia para problemas de software y optimización. Descargá el software necesario aquí:</p>
+            <h3>⚡ Soporte Remoto</h3>
+            <p>Soluciones inmediatas vía RustDesk o AnyDesk.</p>
             <div class="download-links">
-                <a href="https://rustdesk.com/download" target="_blank" class="btn-download">⬇️ RustDesk</a>
-                <a href="https://anydesk.com/es/downloads/windows" target="_blank" class="btn-download">⬇️ AnyDesk</a>
+                <a href="https://rustdesk.com/" target="_blank" class="btn-dl">RustDesk</a>
+                <a href="https://anydesk.com/" target="_blank" class="btn-dl">AnyDesk</a>
             </div>
         </div>
-
         <div class="card">
-            <h3>🛠️ Mantenimiento y Hardware</h3>
-            <p style="color: #ccc; font-size: 0.9rem;">Formateo, instalación de Windows, limpieza interna y cambio de componentes como discos SSD y RAM.</p>
+            <h3>🛠️ Mantenimiento</h3>
+            <p>Limpieza, pasta térmica, formateo y discos SSD.</p>
         </div>
     </div>
 
     <section class="contact-box">
-        <h2 style="text-align: center; margin-bottom: 30px; font-weight: 300;">Solicitá tu <span style="color: var(--accent);">presupuesto</span></h2>
+        <h2 style="text-align: center; margin-bottom: 20px;">Presupuesto sin cargo</h2>
         <form id="serviceForm">
-            <div style="margin-bottom: 20px;">
-                <label style="font-size: 0.9rem; color: var(--accent);">Nombre</label>
-                <input type="text" id="name" placeholder="Tu nombre" required>
-            </div>
-            <div style="margin-bottom: 20px;">
-                <label style="font-size: 0.9rem; color: var(--accent);">¿En qué puedo ayudarte?</label>
-                <select id="service">
-                    <option value="Soporte Remoto">Soporte Remoto urgente</option>
-                    <option value="Limpieza/Mantenimiento">Mantenimiento físico / Formateo</option>
-                    <option value="Cambio de Disco/RAM">Upgrade de Hardware</option>
-                    <option value="Otro">Otro (detallá en el mensaje)</option>
-                </select>
-            </div>
-            <div style="margin-bottom: 20px;">
-                <label style="font-size: 0.9rem; color: var(--accent);">Detalles adicionales</label>
-                <textarea id="message" rows="3" placeholder="Ej: Mi notebook calienta mucho o está muy lenta..." required></textarea>
-            </div>
+            <input type="text" id="name" placeholder="Tu nombre" required>
+            <select id="service">
+                <option value="Remoto">Soporte Remoto</option>
+                <option value="Hardware">Mantenimiento / Hardware</option>
+            </select>
+            <textarea id="message" rows="3" placeholder="Detalle del problema..." required></textarea>
             <button type="submit" class="btn-send">Enviar a WhatsApp</button>
         </form>
     </section>
 
     <div class="footer">
-        <p>Email: <a href="mailto:feloaiza@outlook.com" style="color: var(--accent); text-decoration: none;">feloaiza@outlook.com</a></p>
-        <p>WhatsApp: <a href="https://wa.me/5491166232997" target="_blank" style="color: var(--accent); text-decoration: none;">+54 11 66232997</a></p>
-        <p>© 2026 Felipe Soluciones IT - Buenos Aires</p>
+        <p>feloaiza@outlook.com | +54 11 66232997</p>
+        <p>© 2026 Felipe Soluciones IT</p>
     </div>
 </div>
 
 <script>
-    // --- Script de Fondo de Partículas ---
     const canvas = document.getElementById('particles-canvas');
     const ctx = canvas.getContext('2d');
     let particles = [];
-    const particleCount = 70; // Menos partículas para un efecto más sutil
 
-    function resizeCanvas() {
+    function initCanvas() {
         canvas.width = window.innerWidth;
-        canvas.height = document.documentElement.scrollHeight > window.innerHeight ? document.documentElement.scrollHeight : window.innerHeight;
+        canvas.height = window.innerHeight;
     }
-    window.addEventListener('resize', resizeCanvas);
-    resizeCanvas();
+    window.addEventListener('resize', initCanvas);
+    initCanvas();
 
     class Particle {
         constructor() {
             this.x = Math.random() * canvas.width;
             this.y = Math.random() * canvas.height;
-            this.vx = (Math.random() - 0.5) * 0.2; // Velocidad más lenta
-            this.vy = (Math.random() - 0.5) * 0.2;
-            this.radius = Math.random() * 2 + 0.5; // Tamaño más pequeño
-            this.color = `rgba(255, 255, 255, ${Math.random() * 0.3 + 0.1})`; // Más transparentes
+            this.vx = (Math.random() - 0.5) * 0.5;
+            this.vy = (Math.random() - 0.5) * 0.5;
+            this.size = Math.random() * 3 + 1;
         }
         update() {
-            this.x += this.vx;
-            this.y += this.vy;
-
-            if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
-            if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+            this.x += this.vx; this.y += this.vy;
+            if(this.x < 0 || this.x > canvas.width) this.vx *= -1;
+            if(this.y < 0 || this.y > canvas.height) this.vy *= -1;
         }
         draw() {
+            ctx.fillStyle = 'rgba(255, 180, 0, 0.6)'; // Partículas doradas para que se vean
             ctx.beginPath();
-            ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-            ctx.fillStyle = this.color;
-            ctx.shadowBlur = this.radius * 2; // Efecto de brillo
-            ctx.shadowColor = 'rgba(255, 180, 0, 0.8)'; // Brillo dorado
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI*2);
             ctx.fill();
         }
     }
 
-    for (let i = 0; i < particleCount; i++) {
-        particles.push(new Particle());
-    }
+    for(let i=0; i<80; i++) particles.push(new Particle());
 
-    function animateParticles() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height); // Limpiar solo el área visible
-
+    function animate() {
+        ctx.clearRect(0,0,canvas.width, canvas.height);
         particles.forEach(p => {
             p.update();
             p.draw();
         });
-
-        // Dibujar líneas entre partículas cercanas
-        const maxDistance = 100; // Distancia máxima para conectar partículas
-        for (let i = 0; i < particles.length; i++) {
-            for (let j = i + 1; j < particles.length; j++) {
-                const dx = particles[i].x - particles[j].x;
-                const dy = particles[i].y - particles[j].y;
-                const distance = Math.sqrt(dx * dx + dy * dy);
-
-                if (distance < maxDistance) {
+        
+        // Dibujar líneas más visibles
+        for(let i=0; i<particles.length; i++) {
+            for(let j=i+1; j<particles.length; j++) {
+                let dist = Math.hypot(particles[i].x - particles[j].x, particles[i].y - particles[j].y);
+                if(dist < 120) {
+                    ctx.strokeStyle = `rgba(255, 180, 0, ${1 - dist/120})`;
+                    ctx.lineWidth = 0.5;
                     ctx.beginPath();
                     ctx.moveTo(particles[i].x, particles[i].y);
                     ctx.lineTo(particles[j].x, particles[j].y);
-                    ctx.strokeStyle = `rgba(255, 255, 255, ${0.1 * (1 - distance / maxDistance)})`;
-                    ctx.lineWidth = 0.5;
                     ctx.stroke();
                 }
             }
         }
-        requestAnimationFrame(animateParticles);
+        requestAnimationFrame(animate);
     }
-    animateParticles();
+    animate();
 
-    // --- Animación de elementos al hacer scroll (Intersection Observer) ---
-    const observerOptions = {
-        root: null,
-        rootMargin: '0px',
-        threshold: 0.1 // El elemento es visible en un 10%
-    };
-
-    const observer = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-                observer.unobserve(entry.target); // Dejar de observar una vez que es visible
-            }
-        });
-    }, observerOptions);
-
-    document.querySelectorAll('.card, .contact-box').forEach(el => {
-        observer.observe(el);
-    });
-
-    // --- Script del Formulario a WhatsApp ---
     document.getElementById('serviceForm').addEventListener('submit', function(e) {
         e.preventDefault();
-        
-        const name = document.getElementById('name').value;
-        const service = document.getElementById('service').value;
-        const msg = document.getElementById('message').value;
-        
-        const whatsappNum = "5491166232997"; 
-        const texto = `¡Hola Felipe! Soy ${name}. Consulto por servicio de: *${service}*. Detalle: ${msg}`;
-        
-        window.open(`https://wa.me/${whatsappNum}?text=${encodeURIComponent(texto)}`, '_blank');
+        const texto = `Hola Felipe! Soy ${document.getElementById('name').value}. Consulto por: ${document.getElementById('service').value}.`;
+        window.open(`https://wa.me/5491166232997?text=${encodeURIComponent(texto)}`);
     });
 </script>
-
 </body>
 </html>
