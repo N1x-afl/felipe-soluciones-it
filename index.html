@@ -180,4 +180,132 @@
     <div class="services">
         <div class="card">
             <h3>⚡ Soporte Remoto</h3>
-            <a href="https://download.anydesk.com/AnyDesk.exe" target="_blank" class="btn-dl btn-anydesk">Cargar AnyDesk
+            <a href="https://download.anydesk.com/AnyDesk.exe" target="_blank" class="btn-dl btn-anydesk">Cargar AnyDesk</a>
+            <a href="https://github.com/rustdesk/rustdesk/releases/download/1.2.3-2/rustdesk-1.2.3-2-x86_64.exe" target="_blank" class="btn-dl btn-rustdesk">Cargar RustDesk</a>
+        </div>
+        <div class="card">
+            <h3>💿 Software</h3>
+            <p>Optimización, limpieza de virus y puesta a punto general.</p>
+        </div>
+        <div class="card">
+            <h3>🔧 Mantenimiento</h3>
+            <p>Limpieza física profunda, pasta térmica y upgrades.</p>
+        </div>
+    </div>
+
+    <section class="pricing-section">
+        <h2 style="text-align: center; color: var(--accent); margin-bottom: 20px; font-size: 1.5rem;">Tarifas Vigentes</h2>
+        <div class="pricing-table-wrapper">
+            <table class="pricing-table">
+                <thead>
+                    <tr>
+                        <th>Servicio</th>
+                        <th>Equipo</th>
+                        <th>Costo de Mano de Obra</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>Diagnóstico / Revisión</td><td>PC-Notebook</td><td class="price-tag">$14.500</td></tr>
+                    <tr><td>Formateo e Inst. SO (Sin Backup)</td><td>PC-Notebook-AIO</td><td class="price-tag">$50.000</td></tr>
+                    <tr><td>Full: Limpieza + Formateo + SSD + Backup 100GB</td><td>PC-Notebook-AIO</td><td class="price-tag">$58.000</td></tr>
+                    <tr><td>Limpieza Hardware + Pasta Térmica</td><td>Notebook-AIO-Consolas</td><td class="price-tag">$30.000</td></tr>
+                    <tr><td>Soporte Remoto (1 Hora)</td><td>PC-Notebook-AIO</td><td class="price-tag">$11.000</td></tr>
+                    <tr><td>Backup Extra (Cada 100GB)</td><td>PC-Notebook-AIO</td><td class="price-tag">$14.500</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <p class="nota-importante">⚠️ Los valores indicados corresponden únicamente a la mano de obra. Los repuestos (discos SSD, memorias RAM, etc.) son provistos por el cliente o cotizados por separado según el modelo del equipo.</p>
+    </section>
+
+    <section class="contact-box">
+        <h2 style="text-align: center; margin-bottom: 15px;">Enviar Consulta</h2>
+        <form id="serviceForm">
+            <input type="text" name="nombre" placeholder="Tu nombre" required>
+            <input type="tel" name="telefono" placeholder="WhatsApp / Celular" required>
+            <select name="servicio">
+                <option value="Diagnostico">Diagnóstico / Revisión</option>
+                <option value="Formateo">Formateo e Instalación</option>
+                <option value="Mantenimiento">Mantenimiento Físico</option>
+                <option value="Remoto">Soporte Remoto</option>
+            </select>
+            <textarea name="mensaje" rows="3" placeholder="Detalle del problema..." required></textarea>
+            <button type="submit" class="btn-send" id="submit-btn">Solicitar Presupuesto</button>
+            <p style="font-size: 0.75rem; color: #777; margin-top: 10px; text-align: center;">* Al enviar confirmás que el hardware necesario corre por cuenta del cliente.</p>
+        </form>
+        <div id="form-status"></div>
+    </section>
+
+    <div class="footer">
+        <p>© 2026 Felipe Soluciones IT - Buenos Aires</p>
+    </div>
+</div>
+
+<script>
+    const canvas = document.getElementById('particles-canvas');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+    function init() {
+        canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+        particles = []; for(let i=0; i<80; i++) particles.push(new Particle());
+    }
+    class Particle {
+        constructor() {
+            this.x = Math.random() * canvas.width; this.y = Math.random() * canvas.height;
+            this.vx = (Math.random() - 0.5) * 0.7; this.vy = (Math.random() - 0.5) * 0.7;
+            this.size = Math.random() * 2 + 1;
+        }
+        update() {
+            this.x += this.vx; this.y += this.vy;
+            if(this.x < 0 || this.x > canvas.width) this.vx *= -1;
+            if(this.y < 0 || this.y > canvas.height) this.vy *= -1;
+        }
+        draw() {
+            ctx.fillStyle = 'rgba(255, 180, 0, 0.5)';
+            ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI*2); ctx.fill();
+        }
+    }
+    function animate() {
+        ctx.clearRect(0,0,canvas.width, canvas.height);
+        particles.forEach(p => { p.update(); p.draw(); });
+        requestAnimationFrame(animate);
+    }
+    window.addEventListener('resize', init);
+    init(); animate();
+
+    const form = document.getElementById("serviceForm");
+    const status = document.getElementById("form-status");
+    const btn = document.getElementById("submit-btn");
+
+    form.addEventListener("submit", async function(event) {
+      event.preventDefault();
+      btn.disabled = true; btn.innerText = "Enviando...";
+      const data = new FormData(event.target);
+      fetch("https://formspree.io/f/mpqdakpy", {
+        method: "POST", body: data, headers: { 'Accept': 'application/json' }
+      }).then(response => {
+        if (response.ok) {
+          status.innerHTML = "¡Consulta enviada! Te contactaré a la brevedad.";
+          status.className = "success"; form.reset();
+        } else {
+          status.innerHTML = "Error al enviar.";
+          status.className = "error";
+        }
+        btn.disabled = false; btn.innerText = "Solicitar Presupuesto";
+      });
+    });
+</script>
+
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/697679661b8e46197d9d1c96/1jfrckest';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+
+</body>
+</html>
