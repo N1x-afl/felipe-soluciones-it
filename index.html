@@ -6,7 +6,7 @@
     <title>Felipe Soluciones IT | Soporte Técnico Profesional</title>
     <style>
         :root {
-            --accent: #ffb400; /* Dorado vibrante como tu referencia */
+            --accent: #ffb400; 
             --bg: #0a0a0b;
             --glass: rgba(255, 255, 255, 0.03);
             --border: rgba(255, 180, 0, 0.3);
@@ -18,9 +18,40 @@
             color: #ffffff;
             margin: 0;
             line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
         }
 
-        .container { max-width: 900px; margin: 0 auto; padding: 40px 20px; }
+        /* --- EFECTO DE ONDAS ANIMADAS --- */
+        .waves-container {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            opacity: 0.4;
+        }
+
+        .wave {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/85486/wave.svg') repeat-x;
+            animation: move-wave 10s linear infinite;
+        }
+
+        .wave1 { height: 120px; opacity: 0.3; animation-duration: 20s; }
+        .wave2 { height: 80px; opacity: 0.2; animation-duration: 15s; bottom: 10px; animation-direction: reverse; }
+
+        @keyframes move-wave {
+            0% { background-position-x: 0; }
+            100% { background-position-x: 1600px; }
+        }
+
+        .container { max-width: 900px; margin: 0 auto; padding: 40px 20px; position: relative; }
 
         /* Encabezado */
         header { text-align: center; margin-bottom: 50px; }
@@ -34,7 +65,7 @@
             text-transform: uppercase;
         }
 
-        /* Grid de Servicios Reales */
+        /* Grid de Servicios */
         .services {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -48,24 +79,26 @@
             border-radius: 15px;
             padding: 25px;
             transition: 0.4s;
-            position: relative;
+            backdrop-filter: blur(10px);
         }
 
         .card:hover {
             border-color: var(--accent);
             transform: translateY(-5px);
-            box-shadow: 0 0 20px rgba(255, 180, 0, 0.15);
+            box-shadow: 0 0 20px rgba(255, 180, 0, 0.2);
         }
 
         .card h3 { color: var(--accent); margin-top: 0; font-size: 1.3rem; }
         .card p { font-size: 0.95rem; color: #ccc; }
+        .badge { background: rgba(255,255,255,0.1); padding: 4px 8px; border-radius: 5px; font-size: 0.8rem; border: 1px solid rgba(255,255,255,0.2); margin-right: 5px; }
 
-        /* Sección de Contacto Unificada */
+        /* Formulario */
         .contact-box {
             background: linear-gradient(145deg, rgba(255,255,255,0.05), rgba(0,0,0,0));
             border: 1px solid rgba(255,255,255,0.1);
             border-radius: 20px;
             padding: 40px;
+            backdrop-filter: blur(5px);
         }
 
         .form-group { margin-bottom: 20px; }
@@ -74,16 +107,11 @@
         input, select, textarea {
             width: 100%;
             padding: 14px;
-            background: rgba(0,0,0,0.3);
+            background: rgba(0,0,0,0.5);
             border: 1px solid rgba(255,255,255,0.1);
             border-radius: 10px;
             color: white;
             font-size: 1rem;
-        }
-
-        input:focus, select:focus, textarea:focus {
-            border-color: var(--accent);
-            outline: none;
         }
 
         .btn-send {
@@ -108,36 +136,45 @@
         .info-footer {
             text-align: center;
             margin-top: 30px;
-            color: #666;
+            color: #888;
             font-size: 0.9rem;
         }
 
         @media (max-width: 600px) {
-            .hero-title { font-size: 2rem; }
-            .contact-box { padding: 20px; }
+            .hero-title { font-size: 2.2rem; }
+            .contact-box { padding: 25px; }
         }
     </style>
 </head>
 <body>
 
+<div class="waves-container">
+    <div class="wave wave1"></div>
+    <div class="wave wave2"></div>
+</div>
+
 <div class="container">
     <header>
         <h1 class="hero-title">Felipe Soluciones IT</h1>
-        <p>Servicio Técnico de Computadoras y Notebooks</p>
+        <p>Servicio Técnico Profesional | Buenos Aires</p>
     </header>
 
     <div class="services">
         <div class="card">
-            <h3>💻 Formateo y Soft</h3>
-            <p>Instalación de Windows, drivers y programas esenciales para que tu equipo vuele.</p>
+            <h3>🖥️ Mantenimiento y Soft</h3>
+            <p>Formateo, instalación de Windows, limpieza física y cambio de pasta térmica.</p>
         </div>
         <div class="card">
-            <h3>⚙️ Mantenimiento</h3>
-            <p>Limpieza interna profunda y cambio de pasta térmica para evitar que se apague sola.</p>
+            <h3>⚡ Asistencia Remota</h3>
+            <p>Soluciones rápidas sin moverte de tu casa. Configuración de software y optimización.</p>
+            <div style="margin-top: 10px;">
+                <span class="badge">RustDesk</span>
+                <span class="badge">AnyDesk</span>
+            </div>
         </div>
         <div class="card">
-            <h3>🚀 Optimización</h3>
-            <p>Cambio de discos rígidos por SSD para revivir tu notebook vieja.</p>
+            <h3>🚀 Hardware Upgrade</h3>
+            <p>Instalación de discos SSD y ampliación de memoria RAM para notebooks y PC.</p>
         </div>
     </div>
 
@@ -145,29 +182,29 @@
         <h2 style="text-align: center; margin-bottom: 30px;">Pedí tu presupuesto</h2>
         <form id="serviceForm">
             <div class="form-group">
-                <label>Nombre completo</label>
-                <input type="text" id="name" placeholder="Ej: Felipe A." required>
+                <label>Nombre</label>
+                <input type="text" id="name" placeholder="Tu nombre" required>
             </div>
             <div class="form-group">
-                <label>Servicio requerido</label>
+                <label>¿Qué servicio necesitás?</label>
                 <select id="service">
+                    <option value="Soporte Remoto">Soporte Remoto (AnyDesk/RustDesk)</option>
                     <option value="Formateo">Formateo e Instalación</option>
                     <option value="Limpieza">Limpieza y Pasta Térmica</option>
-                    <option value="Optimización">Optimización / Disco SSD</option>
-                    <option value="Otro">Otros problemas técnicos</option>
+                    <option value="Hardware">Upgrade de Hardware</option>
                 </select>
             </div>
             <div class="form-group">
-                <label>Contame qué le pasa al equipo</label>
-                <textarea id="message" rows="3" placeholder="Ej: No enciende, hace ruido..." required></textarea>
+                <label>Detalle del problema</label>
+                <textarea id="message" rows="3" placeholder="Ej: La notebook no conecta a WiFi..." required></textarea>
             </div>
-            <button type="submit" class="btn-send">Enviar Solicitud</button>
+            <button type="submit" class="btn-send">Enviar WhatsApp</button>
         </form>
     </section>
 
     <div class="info-footer">
         <p>Email: feloaiza@outlook.com | WhatsApp: +54 11 66232997</p>
-        <p>© 2026 Felipe Soluciones IT - Buenos Aires</p>
+        <p>© 2026 Felipe Soluciones IT</p>
     </div>
 </div>
 
@@ -179,14 +216,10 @@
         const service = document.getElementById('service').value;
         const msg = document.getElementById('message').value;
         
-        // Configuración de contacto
         const whatsappNum = "5491166232997"; 
+        const texto = `¡Hola Felipe! Mi nombre es ${name}. Consulto por servicio de: *${service}*. Detalle: ${msg}`;
         
-        // Construir mensaje para WhatsApp
-        const texto = `¡Hola Felipe! Mi nombre es ${name}. Necesito presupuesto por: *${service}*. Detalle: ${msg}`;
-        const finalUrl = `https://wa.me/${whatsappNum}?text=${encodeURIComponent(texto)}`;
-        
-        window.open(finalUrl, '_blank');
+        window.open(`https://wa.me/${whatsappNum}?text=${encodeURIComponent(texto)}`, '_blank');
     });
 </script>
 
