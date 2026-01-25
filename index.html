@@ -11,8 +11,7 @@
             --bg: #050505;
             --glass: rgba(255, 255, 255, 0.05);
             --border: rgba(255, 180, 0, 0.4);
-            --anydesk-red: #ef4444;
-            --rustdesk-blue: #3b82f6;
+            --whatsapp: #25d366;
         }
 
         body {
@@ -23,7 +22,6 @@
             overflow-x: hidden;
         }
 
-        /* FONDO DE PARTÍCULAS DORADAS */
         #particles-canvas {
             position: fixed;
             top: 0; left: 0;
@@ -40,7 +38,7 @@
             z-index: 10; 
         }
 
-        /* ANIMACIÓN NOTEBOOK 3D (Se mantiene abriéndose) */
+        /* --- NOTEBOOK 3D --- */
         .laptop-container {
             perspective: 1000px;
             margin-bottom: 20px;
@@ -61,7 +59,7 @@
 
         header { text-align: center; margin-bottom: 60px; }
         
-        /* --- NUEVO EFECTO: ENTRADA DESDE EL FRENTE --- */
+        /* --- TÍTULO ZOOM IN --- */
         .hero-title { 
             font-size: clamp(2.2rem, 8vw, 3.8rem);
             background: linear-gradient(to right, #fff, var(--accent));
@@ -75,19 +73,43 @@
         }
 
         @keyframes zoomFromFront {
-            0% {
-                transform: scale(0.5) translateZ(-500px);
-                opacity: 0;
-                filter: blur(10px);
-            }
-            100% {
-                transform: scale(1) translateZ(0);
-                opacity: 1;
-                filter: blur(0);
-            }
+            0% { transform: scale(0.5) translateZ(-500px); opacity: 0; filter: blur(10px); }
+            100% { transform: scale(1) translateZ(0); opacity: 1; filter: blur(0); }
         }
 
-        /* TARJETAS DE SERVICIO */
+        /* --- CHAT FLOTANTE ESTILO MODERNO --- */
+        .whatsapp-chat {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            background: var(--whatsapp);
+            padding: 10px 20px;
+            border-radius: 50px;
+            color: white;
+            font-weight: 600;
+            box-shadow: 0 10px 25px rgba(37, 211, 102, 0.3);
+            transition: 0.3s;
+            animation: slideUp 1s ease-out 2s both; /* Aparece un poco después */
+        }
+
+        .whatsapp-chat:hover {
+            transform: scale(1.05) translateY(-5px);
+            box-shadow: 0 15px 30px rgba(37, 211, 102, 0.5);
+        }
+
+        .whatsapp-chat i { font-size: 1.5rem; }
+
+        @keyframes slideUp {
+            from { transform: translateY(100px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        /* SERVICIOS */
         .services {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -104,41 +126,7 @@
             transition: 0.4s ease;
         }
 
-        .card:hover {
-            border-color: #fff;
-            transform: translateY(-10px);
-            box-shadow: 0 10px 30px rgba(255, 180, 0, 0.25);
-        }
-
-        .card h3 { color: var(--accent); margin-bottom: 10px; }
-
-        .download-links {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            margin-top: 15px;
-        }
-
-        .btn-dl {
-            padding: 12px;
-            border-radius: 10px;
-            text-decoration: none;
-            color: white;
-            font-size: 0.9rem;
-            font-weight: 600;
-            transition: 0.3s;
-            text-align: center;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-
-        .btn-anydesk { background: rgba(239, 68, 68, 0.15); border: 1px solid var(--anydesk-red); }
-        .btn-anydesk:hover { background: var(--anydesk-red); box-shadow: 0 0 15px rgba(239, 68, 68, 0.4); }
-
-        .btn-rustdesk { background: rgba(59, 130, 246, 0.15); border: 1px solid var(--rustdesk-blue); }
-        .btn-rustdesk:hover { background: var(--rustdesk-blue); box-shadow: 0 0 15px rgba(59, 130, 246, 0.4); }
+        .card:hover { border-color: #fff; transform: translateY(-10px); }
 
         /* FORMULARIO */
         .contact-box {
@@ -146,24 +134,19 @@
             border: 1px solid rgba(255,255,255,0.1);
             padding: 40px;
             border-radius: 25px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
         }
 
         input, select, textarea {
             width: 100%; padding: 15px; margin-top: 12px;
             background: rgba(0,0,0,0.7); border: 1px solid rgba(255,255,255,0.15);
-            border-radius: 12px; color: white; font-size: 1rem;
-            box-sizing: border-box;
+            border-radius: 12px; color: white;
         }
 
         .btn-send {
             background: var(--accent); color: black; font-weight: 800;
             width: 100%; padding: 20px; border: none; border-radius: 12px;
             margin-top: 25px; cursor: pointer; text-transform: uppercase;
-            font-size: 1.1rem; transition: 0.3s;
         }
-
-        .btn-send:hover { transform: scale(1.02); filter: brightness(1.1); box-shadow: 0 0 20px rgba(255, 180, 0, 0.4); }
 
         .footer { text-align: center; margin-top: 50px; color: #666; font-size: 0.85rem; }
     </style>
@@ -171,6 +154,11 @@
 <body>
 
 <canvas id="particles-canvas"></canvas>
+
+<a href="https://wa.me/5491166232997?text=Hola%20Felipe!%20Necesito%20ayuda%20con%20un%20equipo." class="whatsapp-chat" target="_blank">
+    <i class="fab fa-whatsapp"></i>
+    <span>¿Necesitás ayuda técnica?</span>
+</a>
 
 <div class="container">
     <header>
@@ -180,60 +168,46 @@
         <div>
             <h1 class="hero-title">Felipe Soluciones IT</h1>
         </div>
-        <p style="color: #888; margin-top: 10px;">Servicio Técnico Profesional y Confiable</p>
+        <p style="color: #888; margin-top: 10px;">Soporte Técnico Especializado en Buenos Aires</p>
     </header>
 
     <div class="services">
         <div class="card">
             <h3>⚡ Soporte Remoto</h3>
-            <p>Descarga directa para asistencia inmediata:</p>
-            <div class="download-links">
-                <a href="https://download.anydesk.com/AnyDesk.exe" target="_blank" class="btn-dl btn-anydesk">
-                    <i class="fa-solid fa-download"></i> Windows: AnyDesk
-                </a>
-                <a href="https://github.com/rustdesk/rustdesk/releases/download/1.2.3-2/rustdesk-1.2.3-2-x86_64.exe" target="_blank" class="btn-dl btn-rustdesk">
-                    <i class="fa-solid fa-download"></i> Windows: RustDesk
-                </a>
-            </div>
+            <p>Atención inmediata vía AnyDesk o RustDesk.</p>
         </div>
         <div class="card">
             <h3>💿 Formateo y Soft</h3>
-            <p>Instalación de Windows 10/11, drivers oficiales y backup de datos seguro.</p>
+            <p>Windows 10/11, drivers y optimización completa.</p>
         </div>
         <div class="card">
-            <h3>🔧 Upgrade y Mantenimiento</h3>
-            <p>Asesoría en compra e instalación de SSD y RAM. Limpieza profunda y cambio de pasta térmica.</p>
+            <h3>🔧 Mantenimiento</h3>
+            <p>Limpieza profunda y cambio de pasta térmica.</p>
         </div>
     </div>
 
     <section class="contact-box">
-        <h2 style="text-align: center; margin-bottom: 10px; font-weight: 400;">Presupuesto <span style="color: var(--accent)">WhatsApp & Email</span></h2>
-        
+        <h2 style="text-align: center; margin-bottom: 20px;">Presupuesto sin cargo</h2>
         <form id="serviceForm" action="https://formspree.io/f/mpqdakpy" method="POST">
             <input type="text" name="nombre" id="name" placeholder="Tu nombre" required>
             <select name="servicio" id="service">
-                <option value="Formateo e Instalacion">Formateo e Instalación de Sistema</option>
-                <option value="Soporte Remoto">Soporte Remoto urgente</option>
-                <option value="Limpieza y Mantenimiento">Limpieza Física / Pasta Térmica</option>
-                <option value="Asesoria y Upgrade Hardware">Upgrade de Disco SSD / RAM</option>
+                <option value="Formateo">Formateo e Instalación</option>
+                <option value="Remoto">Soporte Remoto</option>
+                <option value="Limpieza">Mantenimiento Físico</option>
             </select>
-            <textarea name="mensaje" id="message" rows="3" placeholder="Contame qué problema tiene tu equipo..." required></textarea>
-            
+            <textarea name="mensaje" id="message" rows="3" placeholder="Detalle del problema..." required></textarea>
             <input type="hidden" name="_replyto" value="feloaiza@outlook.com">
-            
-            <button type="submit" class="btn-send">Consultar Ahora</button>
-            <p class="nota-hardware">* Los repuestos se cotizan por separado según el modelo de tu equipo.</p>
+            <button type="submit" class="btn-send">Enviar Consulta</button>
         </form>
     </section>
 
     <div class="footer">
-        <p>Email: feloaiza@outlook.com | WhatsApp: +54 11 66232997</p>
         <p>© 2026 Felipe Soluciones IT - Buenos Aires</p>
     </div>
 </div>
 
 <script>
-    // --- LÓGICA DE PARTÍCULAS DORADAS ---
+    // Partículas (Dorado brillante)
     const canvas = document.getElementById('particles-canvas');
     const ctx = canvas.getContext('2d');
     let particles = [];
@@ -260,28 +234,22 @@
         }
         draw() {
             ctx.fillStyle = 'rgba(255, 180, 0, 0.8)';
-            ctx.beginPath();
-            ctx.arc(this.x, this.y, this.size, 0, Math.PI*2);
-            ctx.fill();
+            ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI*2); ctx.fill();
         }
     }
 
-    for(let i=0; i<75; i++) particles.push(new Particle());
+    for(let i=0; i<70; i++) particles.push(new Particle());
 
     function animate() {
         ctx.clearRect(0,0,canvas.width, canvas.height);
         particles.forEach(p => { p.update(); p.draw(); });
-        
         for(let i=0; i<particles.length; i++) {
             for(let j=i+1; j<particles.length; j++) {
                 let dist = Math.hypot(particles[i].x - particles[j].x, particles[i].y - particles[j].y);
-                if(dist < 140) {
-                    ctx.strokeStyle = `rgba(255, 180, 0, ${0.8 - dist/140})`;
-                    ctx.lineWidth = 0.7;
-                    ctx.beginPath();
-                    ctx.moveTo(particles[i].x, particles[i].y);
-                    ctx.lineTo(particles[j].x, particles[j].y);
-                    ctx.stroke();
+                if(dist < 130) {
+                    ctx.strokeStyle = `rgba(255, 180, 0, ${0.7 - dist/130})`;
+                    ctx.lineWidth = 0.6;
+                    ctx.beginPath(); ctx.moveTo(particles[i].x, particles[i].y); ctx.lineTo(particles[j].x, particles[j].y); ctx.stroke();
                 }
             }
         }
@@ -289,16 +257,13 @@
     }
     animate();
 
-    // --- ENVÍO DOBLE ---
+    // Lógica dual WhatsApp/Email
     document.getElementById('serviceForm').addEventListener('submit', function(e) {
         const name = document.getElementById('name').value;
         const service = document.getElementById('service').value;
         const msg = document.getElementById('message').value;
-        const phone = "5491166232997";
-        
-        const text = `¡Hola Felipe! Soy ${name}. Consulto por servicio de: *${service}*. Detalle: ${msg}`;
-        
-        window.open(`https://wa.me/${phone}?text=${encodeURIComponent(text)}`, '_blank');
+        const text = `¡Hola Felipe! Soy ${name}. Necesito soporte por: ${service}. Detalle: ${msg}`;
+        window.open(`https://wa.me/5491166232997?text=${encodeURIComponent(text)}`, '_blank');
     });
 </script>
 </body>
