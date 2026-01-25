@@ -39,7 +39,6 @@
             z-index: 10; 
         }
 
-        /* ANIMACIÓN NOTEBOOK 3D */
         .laptop-container {
             perspective: 1000px;
             margin-bottom: 20px;
@@ -194,16 +193,20 @@
     </div>
 
     <section class="contact-box">
-        <h2 style="text-align: center; margin-bottom: 10px; font-weight: 400;">Presupuesto <span style="color: var(--accent)">WhatsApp</span></h2>
-        <form id="serviceForm">
-            <input type="text" id="name" placeholder="Tu nombre" required>
-            <select id="service">
+        <h2 style="text-align: center; margin-bottom: 10px; font-weight: 400;">Presupuesto <span style="color: var(--accent)">WhatsApp & Email</span></h2>
+        
+        <form id="serviceForm" action="https://formspree.io/f/mpqdakpy" method="POST">
+            <input type="text" name="nombre" id="name" placeholder="Tu nombre" required>
+            <select name="servicio" id="service">
                 <option value="Formateo e Instalacion">Formateo e Instalación de Sistema</option>
                 <option value="Soporte Remoto">Soporte Remoto urgente</option>
                 <option value="Limpieza y Mantenimiento">Limpieza Física / Pasta Térmica</option>
                 <option value="Asesoria y Upgrade Hardware">Upgrade de Disco SSD / RAM</option>
             </select>
-            <textarea id="message" rows="3" placeholder="Contame qué problema tiene tu equipo..." required></textarea>
+            <textarea name="mensaje" id="message" rows="3" placeholder="Contame qué problema tiene tu equipo..." required></textarea>
+            
+            <input type="hidden" name="_replyto" value="feloaiza@outlook.com">
+            
             <button type="submit" class="btn-send">Consultar Ahora</button>
             <p class="nota-hardware">* Los repuestos se cotizan por separado según el modelo de tu equipo.</p>
         </form>
@@ -272,13 +275,14 @@
     animate();
 
     document.getElementById('serviceForm').addEventListener('submit', function(e) {
-        e.preventDefault();
         const name = document.getElementById('name').value;
         const service = document.getElementById('service').value;
         const msg = document.getElementById('message').value;
         const phone = "5491166232997";
+        
         const text = `¡Hola Felipe! Soy ${name}. Consulto por servicio de: *${service}*. Detalle: ${msg}`;
-        window.open(`https://wa.me/${phone}?text=${encodeURIComponent(text)}`);
+        
+        window.open(`https://wa.me/${phone}?text=${encodeURIComponent(text)}`, '_blank');
     });
 </script>
 </body>
