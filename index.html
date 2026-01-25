@@ -24,12 +24,11 @@
             overflow-x: hidden;
         }
 
-        /* --- FONDO DE PARTÍCULAS --- */
         #particles-canvas {
             position: fixed;
             top: 0; left: 0;
             width: 100%; height: 100%;
-            z-index: 1; /* Aseguramos que esté detrás de todo */
+            z-index: 1;
             background: radial-gradient(circle at center, #111 0%, #050505 100%);
             pointer-events: none;
         }
@@ -37,7 +36,7 @@
         .container { 
             max-width: 900px; 
             margin: 0 auto; 
-            padding: 60px 20px; 
+            padding: 40px 20px; 
             position: relative; 
             z-index: 10; 
         }
@@ -47,17 +46,16 @@
             flex-direction: column;
             align-items: center;
             text-align: center; 
-            margin-bottom: 60px; 
+            margin-bottom: 50px; 
         }
 
         .laptop-container {
             perspective: 1000px;
-            margin-bottom: 25px;
-            display: block;
+            margin-bottom: 20px;
         }
 
         .fa-laptop {
-            font-size: 5.5rem;
+            font-size: 5rem;
             color: var(--accent);
             animation: laptopAction 4s ease-in-out infinite alternate;
             filter: drop-shadow(0 0 20px rgba(255, 180, 0, 0.6));
@@ -69,7 +67,7 @@
         }
 
         .hero-title { 
-            font-size: clamp(2.2rem, 8vw, 3.8rem);
+            font-size: clamp(2rem, 7vw, 3.5rem);
             background: linear-gradient(to right, #fff, var(--accent));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -80,13 +78,40 @@
         }
 
         @keyframes zoomFromFront {
-            0% { transform: scale(0.5) translateZ(-500px); opacity: 0; filter: blur(10px); }
-            100% { transform: scale(1) translateZ(0); opacity: 1; filter: blur(0); }
+            0% { transform: scale(0.5); opacity: 0; filter: blur(10px); }
+            100% { transform: scale(1); opacity: 1; filter: blur(0); }
         }
 
+        /* --- TABLA DE PRECIOS OPTIMIZADA --- */
+        .pricing-section { margin-bottom: 50px; }
+        
+        .pricing-table-wrapper {
+            overflow-x: auto;
+            background: var(--glass);
+            backdrop-filter: blur(15px);
+            border-radius: 15px;
+            border: 1px solid var(--border);
+        }
+
+        .pricing-table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 600px;
+        }
+
+        .pricing-table th, .pricing-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 180, 0, 0.1);
+        }
+
+        .pricing-table th { background: rgba(255, 180, 0, 0.15); color: var(--accent); font-size: 0.85rem; }
+        .price-tag { color: var(--accent); font-weight: 800; }
+
+        /* --- CARDS Y FORMULARIO --- */
         .services {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 20px;
             margin-bottom: 50px;
         }
@@ -94,51 +119,47 @@
         .card {
             background: var(--glass);
             border: 1px solid var(--border);
-            border-radius: 20px;
-            padding: 25px;
-            backdrop-filter: blur(15px);
-            transition: 0.4s ease;
+            border-radius: 15px;
+            padding: 20px;
+            backdrop-filter: blur(10px);
+            transition: 0.3s;
         }
 
-        .card:hover { border-color: #fff; transform: translateY(-10px); }
+        .card:hover { border-color: #fff; transform: translateY(-5px); }
 
         .btn-dl {
             padding: 10px; border-radius: 8px; text-decoration: none; color: white;
-            font-size: 0.85rem; text-align: center; transition: 0.3s; display: block; margin-top: 10px;
+            font-size: 0.8rem; text-align: center; display: block; margin-top: 10px; transition: 0.3s;
         }
 
         .btn-anydesk { border: 1px solid var(--anydesk-red); background: rgba(239, 68, 68, 0.1); }
-        .btn-anydesk:hover { background: var(--anydesk-red); }
-
         .btn-rustdesk { border: 1px solid var(--rustdesk-blue); background: rgba(59, 130, 246, 0.1); }
+        .btn-anydesk:hover { background: var(--anydesk-red); }
         .btn-rustdesk:hover { background: var(--rustdesk-blue); }
 
         .contact-box {
             background: rgba(255,255,255,0.02);
             border: 1px solid rgba(255,255,255,0.1);
-            padding: 40px;
-            border-radius: 25px;
+            padding: 30px;
+            border-radius: 20px;
         }
 
         input, select, textarea {
-            width: 100%; padding: 15px; margin-top: 12px;
-            background: rgba(0,0,0,0.7); border: 1px solid rgba(255,255,255,0.15);
-            border-radius: 12px; color: white; box-sizing: border-box;
+            width: 100%; padding: 12px; margin-top: 10px;
+            background: rgba(0,0,0,0.6); border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 10px; color: white; box-sizing: border-box;
         }
 
         .btn-send {
             background: var(--accent); color: black; font-weight: 800;
-            width: 100%; padding: 20px; border: none; border-radius: 12px;
-            margin-top: 25px; cursor: pointer; text-transform: uppercase;
+            width: 100%; padding: 18px; border: none; border-radius: 10px;
+            margin-top: 20px; cursor: pointer; text-transform: uppercase;
         }
 
-        #form-status {
-            display: none; margin-top: 20px; padding: 15px; border-radius: 12px; text-align: center; font-weight: 600;
-        }
-
+        #form-status { display: none; margin-top: 15px; padding: 12px; border-radius: 10px; text-align: center; font-weight: 600; }
         #form-status.success { display: block; background: rgba(40, 167, 69, 0.2); border: 1px solid var(--success); color: #afffaf; }
 
-        .footer { text-align: center; margin-top: 50px; color: #666; font-size: 0.85rem; }
+        .footer { text-align: center; margin-top: 40px; color: #555; font-size: 0.8rem; }
     </style>
 </head>
 <body>
@@ -151,36 +172,61 @@
             <i class="fa-solid fa-laptop"></i>
         </div>
         <h1 class="hero-title">Felipe Soluciones IT</h1>
-        <p style="color: #888; margin-top: 15px;">Soporte Técnico Especializado | Buenos Aires</p>
+        <p style="color: #888; margin-top: 10px;">Soporte Técnico Profesional | Buenos Aires</p>
     </header>
+
+    <section class="pricing-section">
+        <h2 style="text-align: center; color: var(--accent); margin-bottom: 20px; font-size: 1.5rem;">Tarifas de Servicios</h2>
+        <div class="pricing-table-wrapper">
+            <table class="pricing-table">
+                <thead>
+                    <tr>
+                        <th>Arreglo / Servicio</th>
+                        <th>Equipo</th>
+                        <th>Costo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>Diagnóstico / Revisión</td><td>PC-Notebook</td><td class="price-tag">$14.500</td></tr>
+                    <tr><td>Formateo e Inst. SO (Sin Backup)</td><td>PC-Notebook-AIO</td><td class="price-tag">$50.000</td></tr>
+                    <tr><td>Full: Limpieza + Formateo + SSD + Backup 100GB</td><td>PC-Notebook-AIO</td><td class="price-tag">$58.000</td></tr>
+                    <tr><td>Limpieza Hardware + Pasta Térmica</td><td>Notebook-AIO-Consolas</td><td class="price-tag">$30.000</td></tr>
+                    <tr><td>Soporte Remoto (1 Hora)</td><td>PC-Notebook-AIO</td><td class="price-tag">$11.000</td></tr>
+                    <tr><td>Backup Extra (Cada 100GB)</td><td>PC-Notebook-AIO</td><td class="price-tag">$14.500</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
 
     <div class="services">
         <div class="card">
             <h3>⚡ Soporte Remoto</h3>
-            <a href="https://download.anydesk.com/AnyDesk.exe" target="_blank" class="btn-dl btn-anydesk">Descargar AnyDesk</a>
-            <a href="https://github.com/rustdesk/rustdesk/releases/download/1.2.3-2/rustdesk-1.2.3-2-x86_64.exe" target="_blank" class="btn-dl btn-rustdesk">Descargar RustDesk</a>
+            <a href="https://download.anydesk.com/AnyDesk.exe" target="_blank" class="btn-dl btn-anydesk">Cargar AnyDesk</a>
+            <a href="https://github.com/rustdesk/rustdesk/releases/download/1.2.3-2/rustdesk-1.2.3-2-x86_64.exe" target="_blank" class="btn-dl btn-rustdesk">Cargar RustDesk</a>
         </div>
         <div class="card">
-            <h3>💿 Formateo y Soft</h3>
-            <p>Instalación de SO, drivers y backup seguro.</p>
+            <h3>💿 Software</h3>
+            <p>Optimización, limpieza de virus y puesta a punto de sistemas.</p>
         </div>
         <div class="card">
             <h3>🔧 Mantenimiento</h3>
-            <p>Limpieza profunda y cambio de pasta térmica profesional.</p>
+            <p>Cambio de componentes (SSD/RAM) y limpieza física profunda.</p>
         </div>
     </div>
 
     <section class="contact-box">
-        <h2 style="text-align: center; margin-bottom: 20px;">Solicitar Presupuesto</h2>
+        <h2 style="text-align: center; margin-bottom: 15px;">Solicitar Servicio</h2>
         <form id="serviceForm">
             <input type="text" name="nombre" placeholder="Tu nombre" required>
+            <input type="tel" name="telefono" placeholder="WhatsApp de contacto" required>
             <select name="servicio">
+                <option value="Diagnostico">Diagnóstico / Revisión</option>
                 <option value="Formateo">Formateo e Instalación</option>
+                <option value="Mantenimiento">Limpieza + Pasta Térmica</option>
                 <option value="Remoto">Soporte Remoto</option>
-                <option value="Limpieza">Mantenimiento Físico</option>
             </select>
-            <textarea name="mensaje" rows="4" placeholder="Detalle del problema..." required></textarea>
-            <button type="submit" class="btn-send" id="submit-btn">Enviar Solicitud</button>
+            <textarea name="mensaje" rows="3" placeholder="Comentame el problema de tu equipo..." required></textarea>
+            <button type="submit" class="btn-send" id="submit-btn">Enviar Consulta</button>
         </form>
         <div id="form-status"></div>
     </section>
@@ -191,24 +237,18 @@
 </div>
 
 <script>
-    // --- MOTOR DE PARTÍCULAS RESTAURADO ---
+    // --- MOTOR DE PARTÍCULAS DORADAS ---
     const canvas = document.getElementById('particles-canvas');
     const ctx = canvas.getContext('2d');
     let particles = [];
-
     function init() {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-        particles = [];
-        for(let i=0; i<80; i++) particles.push(new Particle());
+        canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+        particles = []; for(let i=0; i<80; i++) particles.push(new Particle());
     }
-
     class Particle {
         constructor() {
-            this.x = Math.random() * canvas.width;
-            this.y = Math.random() * canvas.height;
-            this.vx = (Math.random() - 0.5) * 0.8;
-            this.vy = (Math.random() - 0.5) * 0.8;
+            this.x = Math.random() * canvas.width; this.y = Math.random() * canvas.height;
+            this.vx = (Math.random() - 0.5) * 0.7; this.vy = (Math.random() - 0.5) * 0.7;
             this.size = Math.random() * 2 + 1;
         }
         update() {
@@ -217,57 +257,38 @@
             if(this.y < 0 || this.y > canvas.height) this.vy *= -1;
         }
         draw() {
-            ctx.fillStyle = 'rgba(255, 180, 0, 0.6)';
+            ctx.fillStyle = 'rgba(255, 180, 0, 0.5)';
             ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI*2); ctx.fill();
         }
     }
-
     function animate() {
         ctx.clearRect(0,0,canvas.width, canvas.height);
         particles.forEach(p => { p.update(); p.draw(); });
-        
-        for(let i=0; i<particles.length; i++) {
-            for(let j=i+1; j<particles.length; j++) {
-                let dist = Math.hypot(particles[i].x - particles[j].x, particles[i].y - particles[j].y);
-                if(dist < 120) {
-                    ctx.strokeStyle = `rgba(255, 180, 0, ${0.4 - dist/120})`;
-                    ctx.lineWidth = 0.5;
-                    ctx.beginPath(); ctx.moveTo(particles[i].x, particles[i].y); ctx.lineTo(particles[j].x, particles[j].y); ctx.stroke();
-                }
-            }
-        }
         requestAnimationFrame(animate);
     }
-
     window.addEventListener('resize', init);
-    init();
-    animate();
+    init(); animate();
 
-    // --- LÓGICA FORMULARIO ---
+    // --- ENVÍO POR AJAX (Formspree) ---
     const form = document.getElementById("serviceForm");
     const status = document.getElementById("form-status");
     const btn = document.getElementById("submit-btn");
 
     form.addEventListener("submit", async function(event) {
       event.preventDefault();
-      btn.disabled = true;
-      btn.innerText = "Enviando...";
+      btn.disabled = true; btn.innerText = "Enviando...";
       const data = new FormData(event.target);
       fetch("https://formspree.io/f/mpqdakpy", {
-        method: "POST",
-        body: data,
-        headers: { 'Accept': 'application/json' }
+        method: "POST", body: data, headers: { 'Accept': 'application/json' }
       }).then(response => {
         if (response.ok) {
-          status.innerHTML = "¡Su mensaje fue enviado con éxito!";
-          status.className = "success";
-          form.reset();
+          status.innerHTML = "¡Consulta enviada! Te contactaré al WhatsApp a la brevedad.";
+          status.className = "success"; form.reset();
         } else {
-          status.innerHTML = "Error al enviar.";
+          status.innerHTML = "Error al enviar. Usá el chat en vivo.";
           status.className = "error";
         }
-        btn.disabled = false;
-        btn.innerText = "Enviar Solicitud";
+        btn.disabled = false; btn.innerText = "Enviar Consulta";
       });
     });
 </script>
