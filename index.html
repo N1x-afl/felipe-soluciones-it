@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Felipe Soluciones IT</title>
+    <title>Felipe Soluciones IT - Servicio Técnico</title>
     <style>
         * {
             margin: 0;
@@ -12,16 +12,14 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            background: linear-gradient(135deg, #000 0%, #1a1a1a 50%, #2d2d2d 100%);
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background: #0a0a0a; /* Fondo base ultra oscuro */
+            color: #ffffff;
             min-height: 100vh;
-            margin: 0;
-            padding: 0;
-            position: relative;
             overflow-x: hidden;
         }
 
-        /* Canvas de partículas que cubre toda la página */
+        /* Canvas de partículas */
         #particles-canvas {
             position: fixed;
             top: 0;
@@ -33,475 +31,254 @@
         }
 
         .container {
-            background: transparent;
-            max-width: 100%;
-            width: 100%;
-            min-height: 100vh;
-            overflow: visible;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
             position: relative;
             z-index: 1;
         }
 
+        /* Header con efecto de cristal */
         .header {
-            background: transparent;
-            color: white;
-            padding: 80px 40px;
             text-align: center;
-            position: relative;
-            overflow: hidden;
-            border: none;
-            width: 100%;
-        }
-
-        .header-content {
-            position: relative;
-            z-index: 2;
-        }
-
-        #particles-canvas {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1;
-        }
-
-        .header-content {
-            position: relative;
-            z-index: 2;
+            padding: 60px 0;
         }
 
         .icon {
-            width: 100px;
-            height: 100px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
+            width: 90px;
+            height: 90px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
             margin: 0 auto 20px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 50px;
-            animation: iconFloat 3s ease-in-out infinite;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-        }
-
-        .icon:hover {
-            transform: scale(1.1) rotate(5deg);
-            background: rgba(255, 255, 255, 0.2);
-            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.3);
-        }
-
-        @keyframes iconFloat {
-            0%, 100% {
-                transform: translateY(0px);
-            }
-            50% {
-                transform: translateY(-15px);
-            }
+            font-size: 45px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            animation: float 4s ease-in-out infinite;
         }
 
         h1 {
-            font-size: 2.5em;
+            font-size: 2.8em;
+            letter-spacing: -1px;
+            background: linear-gradient(to bottom, #fff, #888);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
             margin-bottom: 10px;
-            animation: fadeInUp 1s ease-out;
-        }
-
-        @keyframes fadeInUp {
-            0% {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
         }
 
         .subtitle {
             font-size: 1.1em;
-            opacity: 0.9;
-            animation: fadeInUp 1s ease-out 0.2s both;
+            color: #aaa;
+            font-weight: 300;
         }
 
-        .content {
-            padding: 60px 20px;
-            background: transparent;
-            border: none;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
+        /* Alerta de confianza */
         .alert {
-            background: rgba(255, 255, 255, 0.95);
-            color: #000;
-            padding: 20px 25px;
-            border-radius: 12px;
+            background: rgba(0, 255, 255, 0.05);
+            border: 1px solid rgba(0, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            border-radius: 16px;
             margin-bottom: 30px;
             display: flex;
             align-items: center;
-            gap: 12px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-            backdrop-filter: blur(10px);
+            gap: 15px;
+            animation: fadeIn 1s ease-out;
         }
 
-        .alert-icon {
-            font-size: 24px;
-        }
-
+        /* Grid de opciones moderno */
         .options {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
+            display: grid;
+            gap: 15px;
             margin-bottom: 30px;
         }
 
         .option {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(12px);
+            padding: 22px;
+            border-radius: 18px;
             display: flex;
             align-items: center;
-            gap: 15px;
-            padding: 20px;
-            background: rgba(255, 255, 255, 0.9);
-            border: 2px solid rgba(255, 255, 255, 0.2);
-            border-radius: 12px;
-            transition: all 0.3s ease;
+            gap: 20px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             cursor: pointer;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            opacity: 0; /* Para la animación de entrada */
+            transform: translateY(20px);
         }
 
         .option:hover {
-            background: rgba(255, 255, 255, 1);
-            border-color: #fff;
-            transform: translateX(5px);
-            box-shadow: 0 8px 25px rgba(255, 255, 255, 0.3);
-        }
-
-        .option::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            height: 100%;
-            width: 4px;
-            background: linear-gradient(180deg, #fff 0%, #ddd 100%);
-            transform: scaleY(0);
-            transition: transform 0.3s ease;
-        }
-
-        .option:hover::before {
-            transform: scaleY(1);
-        }
-
-        @keyframes slideInBounce {
-            0% {
-                transform: translateX(-100px) scale(0.5);
-                opacity: 0;
-            }
-            50% {
-                transform: translateX(10px) scale(1.1);
-            }
-            70% {
-                transform: translateX(-5px) scale(0.95);
-            }
-            100% {
-                transform: translateX(0) scale(1);
-                opacity: 1;
-            }
-        }
-
-        @keyframes float {
-            0%, 100% {
-                transform: translateY(0px);
-            }
-            50% {
-                transform: translateY(-10px);
-            }
-        }
-
-        @keyframes pulse {
-            0%, 100% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(1.2);
-            }
-        }
-
-        @keyframes rotate {
-            0% {
-                transform: rotate(0deg);
-            }
-            100% {
-                transform: rotate(360deg);
-            }
+            background: rgba(255, 255, 255, 0.07);
+            border-color: rgba(0, 255, 255, 0.4);
+            transform: scale(1.03);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
         }
 
         .emoji {
-            font-size: 32px;
-            min-width: 40px;
-            display: inline-block;
-            animation: slideInBounce 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-            animation-fill-mode: both;
-        }
-
-        .option:nth-child(1) .emoji {
-            animation-delay: 0.1s;
-        }
-
-        .option:nth-child(2) .emoji {
-            animation-delay: 0.2s;
-        }
-
-        .option:nth-child(3) .emoji {
-            animation-delay: 0.3s;
-        }
-
-        .option:nth-child(4) .emoji {
-            animation-delay: 0.4s;
-        }
-
-        .option:hover .emoji {
-            animation: float 1s ease-in-out infinite;
-        }
-
-        .option:nth-child(4):hover .emoji {
-            animation: pulse 0.6s ease-in-out infinite;
-        }
-
-        .option:nth-child(2):hover .emoji {
-            animation: none;
-            transform: scale(1.2);
-            transition: transform 0.3s ease;
-        }
-
-        .option:nth-child(3):hover .emoji {
-            animation: rotate 2s linear infinite;
+            font-size: 28px;
+            filter: drop-shadow(0 0 5px rgba(255,255,255,0.2));
         }
 
         .option-text {
-            font-size: 1.1em;
-            color: #000;
-            flex: 1;
+            color: #e0e0e0;
+            font-size: 1.05em;
         }
 
+        /* Call to Action Final */
         .cta {
-            background: linear-gradient(135deg, #fff 0%, #f0f0f0 100%);
-            color: #000;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px dashed rgba(255, 255, 255, 0.2);
             padding: 25px;
-            border-radius: 12px;
+            border-radius: 18px;
             text-align: center;
-            margin-bottom: 20px;
-            cursor: pointer;
-            transition: all 0.3s ease;
+            margin-bottom: 30px;
+        }
+
+        /* Botón de WhatsApp Moderno */
+        .button {
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 12px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-            border: 2px solid rgba(255, 255, 255, 0.3);
-        }
-
-        .cta:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(255, 255, 255, 0.4);
-            background: linear-gradient(135deg, #fff 0%, #fff 100%);
-            border-color: #fff;
-        }
-
-        .cta-emoji {
-            font-size: 28px;
-            animation: pulse 2s ease-in-out infinite;
-        }
-
-        .button {
-            background: linear-gradient(135deg, #fff 0%, #f0f0f0 100%);
-            color: #000;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            padding: 18px 40px;
-            border-radius: 12px;
-            font-size: 1.1em;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            width: 100%;
+            background: linear-gradient(135deg, #00d2ff 0%, #3a7bd5 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 16px;
             text-decoration: none;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            font-weight: 600;
+            font-size: 1.1em;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 20px rgba(58, 123, 213, 0.3);
         }
 
         .button:hover {
-            background: linear-gradient(135deg, #fff 0%, #fff 100%);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(255, 255, 255, 0.4);
-            border-color: #fff;
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(0, 210, 255, 0.5);
+            filter: brightness(1.1);
+        }
+
+        /* Animaciones */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
         }
 
         @media (max-width: 600px) {
-            .header {
-                padding: 60px 20px;
-            }
-
-            h1 {
-                font-size: 2em;
-            }
-
-            .content {
-                padding: 40px 20px;
-            }
-        }
-
-        /* Efecto de resplandor sutil en el fondo */
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.03) 0%, transparent 50%),
-                        radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.03) 0%, transparent 50%);
-            pointer-events: none;
-            z-index: 0;
+            h1 { font-size: 2em; }
+            .option { padding: 18px; }
         }
     </style>
 </head>
 <body>
-    <!-- Canvas de partículas que cubre toda la página -->
+
     <canvas id="particles-canvas"></canvas>
-    
+
     <div class="container">
-        <div class="header">
-            <div class="header-content">
-                <div class="icon">💻</div>
-                <h1>Felipe Soluciones IT</h1>
-                <p class="subtitle">Servicio técnico profesional y confiable</p>
+        <header class="header">
+            <div class="icon">💻</div>
+            <h1>Felipe Soluciones IT</h1>
+            <p class="subtitle">Servicio técnico profesional y confiable</p>
+        </header>
+
+        <div class="alert">
+            <span style="font-size: 24px;">🔧</span>
+            <p><strong>Tu computadora puede tener arreglo.</strong> ¡No te rindas antes de tiempo!</p>
+        </div>
+
+        <div class="options">
+            <div class="option" onclick="location.href='#'">
+                <span class="emoji">😩</span>
+                <span class="option-text">¿Tu computadora ya no responde como antes?</span>
+            </div>
+            <div class="option" onclick="location.href='#'">
+                <span class="emoji">🐢</span>
+                <span class="option-text">¿Sentís que todo va a paso de tortuga?</span>
+            </div>
+            <div class="option" onclick="location.href='#'">
+                <span class="emoji">📢</span>
+                <span class="option-text">¿El ventilador no para de hacer ruido?</span>
+            </div>
+            <div class="option" onclick="location.href='#'">
+                <span class="emoji">🔥</span>
+                <span class="option-text">¿Se recalienta o se apaga sola?</span>
             </div>
         </div>
 
-        <div class="content">
-            <div class="alert">
-                <span class="alert-icon">🔧</span>
-                <strong>¡Tu computadora puede tener arreglo, ¡no te rindas antes de tiempo!</strong>
-            </div>
-
-            <div class="options">
-                <div class="option">
-                    <span class="emoji">😩</span>
-                    <span class="option-text">¿Tu computadora ya no responde como antes?</span>
-                </div>
-
-                <div class="option">
-                    <span class="emoji">🐢</span>
-                    <span class="option-text">¿Sentís que todo va a paso de tortuga?</span>
-                </div>
-
-                <div class="option">
-                    <span class="emoji">📢</span>
-                    <span class="option-text">¿El ventilador no para de hacer ruido?</span>
-                </div>
-
-                <div class="option">
-                    <span class="emoji">🔥</span>
-                    <span class="option-text">¿Se recalienta o se apaga sola?</span>
-                </div>
-            </div>
-
-            <div class="cta">
-                <span class="cta-emoji">🎮</span>
-                <strong>¡Dejala en mis manos y volvé a disfrutar tu PC como nueva!</strong>
-            </div>
-
-            <a href="https://wa.me/5491166232997?text=Hola%20Felipe,%20necesito%20ayuda%20con%20mi%20computadora" class="button">
-                💬 Pedime tu presupuesto sin cargo
-            </a>
+        <div class="cta">
+            <p>🎮 <strong>¡Dejala en mis manos y volvé a disfrutar tu PC como nueva!</strong></p>
         </div>
+
+        <a href="https://wa.me/5491166232997?text=Hola%20Felipe,%20necesito%20ayuda%20con%20mi%20computadora" class="button">
+            <span>💬</span> Pedime tu presupuesto sin cargo
+        </a>
     </div>
 
     <script>
-        // Efecto de red de partículas que cubre TODA LA PÁGINA
+        // 1. Script de Partículas (Mejorado para rendimiento)
         const canvas = document.getElementById('particles-canvas');
         const ctx = canvas.getContext('2d');
+        let particles = [];
 
-        // Ajustar canvas al tamaño completo de la ventana
-        function resizeCanvas() {
+        function resize() {
             canvas.width = window.innerWidth;
-            canvas.height = Math.max(document.documentElement.scrollHeight, window.innerHeight);
+            canvas.height = window.innerHeight;
         }
-        
-        resizeCanvas();
-
-        const particles = [];
-        const particleCount = 80;
-        const maxDistance = 150;
+        window.addEventListener('resize', resize);
+        resize();
 
         class Particle {
             constructor() {
+                this.reset();
+            }
+            reset() {
                 this.x = Math.random() * canvas.width;
                 this.y = Math.random() * canvas.height;
-                this.vx = (Math.random() - 0.5) * 0.5;
-                this.vy = (Math.random() - 0.5) * 0.5;
-                this.radius = Math.random() * 2 + 1;
+                this.vx = (Math.random() - 0.5) * 0.4;
+                this.vy = (Math.random() - 0.5) * 0.4;
+                this.size = Math.random() * 2;
             }
-
             update() {
                 this.x += this.vx;
                 this.y += this.vy;
-
                 if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
                 if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
             }
-
             draw() {
+                ctx.fillStyle = 'rgba(255, 255, 255, 0.3)';
                 ctx.beginPath();
-                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-                ctx.fillStyle = 'rgba(255, 255, 255, 0.5)';
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
                 ctx.fill();
             }
         }
 
-        for (let i = 0; i < particleCount; i++) {
-            particles.push(new Particle());
-        }
+        for (let i = 0; i < 60; i++) particles.push(new Particle());
 
         function animate() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-            particles.forEach(particle => {
-                particle.update();
-                particle.draw();
+            particles.forEach(p => {
+                p.update();
+                p.draw();
             });
-
-            // Dibujar líneas entre partículas cercanas
-            for (let i = 0; i < particles.length; i++) {
-                for (let j = i + 1; j < particles.length; j++) {
-                    const dx = particles[i].x - particles[j].x;
-                    const dy = particles[i].y - particles[j].y;
-                    const distance = Math.sqrt(dx * dx + dy * dy);
-
-                    if (distance < maxDistance) {
-                        ctx.beginPath();
-                        ctx.moveTo(particles[i].x, particles[i].y);
-                        ctx.lineTo(particles[j].x, particles[j].y);
-                        ctx.strokeStyle = `rgba(255, 255, 255, ${0.2 * (1 - distance / maxDistance)})`;
-                        ctx.lineWidth = 1;
-                        ctx.stroke();
-                    }
-                }
-            }
-
             requestAnimationFrame(animate);
         }
-
         animate();
 
-        // Redimensionar canvas al cambiar tamaño de ventana
-        window.addEventListener('resize', resizeCanvas);
+        // 2. Animación de entrada Staggered para las opciones
+        document.querySelectorAll('.option').forEach((el, index) => {
+            setTimeout(() => {
+                el.style.opacity = "1";
+                el.style.transform = "translateY(0)";
+            }, 150 * (index + 1));
+        });
     </script>
 </body>
 </html>
