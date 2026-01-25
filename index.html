@@ -3,282 +3,192 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Felipe Soluciones IT - Servicio Técnico</title>
+    <title>Felipe Soluciones IT | Soporte Técnico Profesional</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        :root {
+            --accent: #ffb400; /* Dorado vibrante como tu referencia */
+            --bg: #0a0a0b;
+            --glass: rgba(255, 255, 255, 0.03);
+            --border: rgba(255, 180, 0, 0.3);
         }
 
         body {
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            background: #0a0a0a; /* Fondo base ultra oscuro */
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background-color: var(--bg);
             color: #ffffff;
-            min-height: 100vh;
-            overflow-x: hidden;
+            margin: 0;
+            line-height: 1.6;
         }
 
-        /* Canvas de partículas */
-        #particles-canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-            pointer-events: none;
-        }
+        .container { max-width: 900px; margin: 0 auto; padding: 40px 20px; }
 
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 40px 20px;
-            position: relative;
-            z-index: 1;
-        }
-
-        /* Header con efecto de cristal */
-        .header {
-            text-align: center;
-            padding: 60px 0;
-        }
-
-        .icon {
-            width: 90px;
-            height: 90px;
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 24px;
-            margin: 0 auto 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 45px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            animation: float 4s ease-in-out infinite;
-        }
-
-        h1 {
-            font-size: 2.8em;
-            letter-spacing: -1px;
-            background: linear-gradient(to bottom, #fff, #888);
+        /* Encabezado */
+        header { text-align: center; margin-bottom: 50px; }
+        .hero-title { 
+            font-size: 3rem; 
+            margin: 0; 
+            background: linear-gradient(to bottom, #fff 30%, var(--accent));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            margin-bottom: 10px;
+            font-weight: 800;
+            text-transform: uppercase;
         }
 
-        .subtitle {
-            font-size: 1.1em;
-            color: #aaa;
-            font-weight: 300;
-        }
-
-        /* Alerta de confianza */
-        .alert {
-            background: rgba(0, 255, 255, 0.05);
-            border: 1px solid rgba(0, 255, 255, 0.2);
-            backdrop-filter: blur(10px);
-            padding: 20px;
-            border-radius: 16px;
-            margin-bottom: 30px;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            animation: fadeIn 1s ease-out;
-        }
-
-        /* Grid de opciones moderno */
-        .options {
+        /* Grid de Servicios Reales */
+        .services {
             display: grid;
-            gap: 15px;
-            margin-bottom: 30px;
-        }
-
-        .option {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(12px);
-            padding: 22px;
-            border-radius: 18px;
-            display: flex;
-            align-items: center;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 20px;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            cursor: pointer;
-            opacity: 0; /* Para la animación de entrada */
-            transform: translateY(20px);
+            margin-bottom: 60px;
         }
 
-        .option:hover {
-            background: rgba(255, 255, 255, 0.07);
-            border-color: rgba(0, 255, 255, 0.4);
-            transform: scale(1.03);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
-        }
-
-        .emoji {
-            font-size: 28px;
-            filter: drop-shadow(0 0 5px rgba(255,255,255,0.2));
-        }
-
-        .option-text {
-            color: #e0e0e0;
-            font-size: 1.05em;
-        }
-
-        /* Call to Action Final */
-        .cta {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px dashed rgba(255, 255, 255, 0.2);
+        .card {
+            background: var(--glass);
+            border: 1px solid var(--border);
+            border-radius: 15px;
             padding: 25px;
-            border-radius: 18px;
-            text-align: center;
-            margin-bottom: 30px;
+            transition: 0.4s;
+            position: relative;
         }
 
-        /* Botón de WhatsApp Moderno */
-        .button {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            background: linear-gradient(135deg, #00d2ff 0%, #3a7bd5 100%);
+        .card:hover {
+            border-color: var(--accent);
+            transform: translateY(-5px);
+            box-shadow: 0 0 20px rgba(255, 180, 0, 0.15);
+        }
+
+        .card h3 { color: var(--accent); margin-top: 0; font-size: 1.3rem; }
+        .card p { font-size: 0.95rem; color: #ccc; }
+
+        /* Sección de Contacto Unificada */
+        .contact-box {
+            background: linear-gradient(145deg, rgba(255,255,255,0.05), rgba(0,0,0,0));
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 20px;
+            padding: 40px;
+        }
+
+        .form-group { margin-bottom: 20px; }
+        label { display: block; margin-bottom: 8px; font-weight: 600; color: var(--accent); }
+        
+        input, select, textarea {
+            width: 100%;
+            padding: 14px;
+            background: rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 10px;
             color: white;
-            padding: 20px;
-            border-radius: 16px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 1.1em;
-            transition: all 0.3s ease;
-            box-shadow: 0 10px 20px rgba(58, 123, 213, 0.3);
+            font-size: 1rem;
         }
 
-        .button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 30px rgba(0, 210, 255, 0.5);
-            filter: brightness(1.1);
+        input:focus, select:focus, textarea:focus {
+            border-color: var(--accent);
+            outline: none;
         }
 
-        /* Animaciones */
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+        .btn-send {
+            background: var(--accent);
+            color: #000;
+            border: none;
+            padding: 16px;
+            width: 100%;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: 0.3s;
+            text-transform: uppercase;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: scale(0.95); }
-            to { opacity: 1; transform: scale(1); }
+        .btn-send:hover {
+            filter: brightness(1.2);
+            box-shadow: 0 0 25px rgba(255, 180, 0, 0.4);
+        }
+
+        .info-footer {
+            text-align: center;
+            margin-top: 30px;
+            color: #666;
+            font-size: 0.9rem;
         }
 
         @media (max-width: 600px) {
-            h1 { font-size: 2em; }
-            .option { padding: 18px; }
+            .hero-title { font-size: 2rem; }
+            .contact-box { padding: 20px; }
         }
     </style>
 </head>
 <body>
 
-    <canvas id="particles-canvas"></canvas>
+<div class="container">
+    <header>
+        <h1 class="hero-title">Felipe Soluciones IT</h1>
+        <p>Servicio Técnico de Computadoras y Notebooks</p>
+    </header>
 
-    <div class="container">
-        <header class="header">
-            <div class="icon">💻</div>
-            <h1>Felipe Soluciones IT</h1>
-            <p class="subtitle">Servicio técnico profesional y confiable</p>
-        </header>
-
-        <div class="alert">
-            <span style="font-size: 24px;">🔧</span>
-            <p><strong>Tu computadora puede tener arreglo.</strong> ¡No te rindas antes de tiempo!</p>
+    <div class="services">
+        <div class="card">
+            <h3>💻 Formateo y Soft</h3>
+            <p>Instalación de Windows, drivers y programas esenciales para que tu equipo vuele.</p>
         </div>
-
-        <div class="options">
-            <div class="option" onclick="location.href='#'">
-                <span class="emoji">😩</span>
-                <span class="option-text">¿Tu computadora ya no responde como antes?</span>
-            </div>
-            <div class="option" onclick="location.href='#'">
-                <span class="emoji">🐢</span>
-                <span class="option-text">¿Sentís que todo va a paso de tortuga?</span>
-            </div>
-            <div class="option" onclick="location.href='#'">
-                <span class="emoji">📢</span>
-                <span class="option-text">¿El ventilador no para de hacer ruido?</span>
-            </div>
-            <div class="option" onclick="location.href='#'">
-                <span class="emoji">🔥</span>
-                <span class="option-text">¿Se recalienta o se apaga sola?</span>
-            </div>
+        <div class="card">
+            <h3>⚙️ Mantenimiento</h3>
+            <p>Limpieza interna profunda y cambio de pasta térmica para evitar que se apague sola.</p>
         </div>
-
-        <div class="cta">
-            <p>🎮 <strong>¡Dejala en mis manos y volvé a disfrutar tu PC como nueva!</strong></p>
+        <div class="card">
+            <h3>🚀 Optimización</h3>
+            <p>Cambio de discos rígidos por SSD para revivir tu notebook vieja.</p>
         </div>
-
-        <a href="https://wa.me/5491166232997?text=Hola%20Felipe,%20necesito%20ayuda%20con%20mi%20computadora" class="button">
-            <span>💬</span> Pedime tu presupuesto sin cargo
-        </a>
     </div>
 
-    <script>
-        // 1. Script de Partículas (Mejorado para rendimiento)
-        const canvas = document.getElementById('particles-canvas');
-        const ctx = canvas.getContext('2d');
-        let particles = [];
+    <section class="contact-box">
+        <h2 style="text-align: center; margin-bottom: 30px;">Pedí tu presupuesto</h2>
+        <form id="serviceForm">
+            <div class="form-group">
+                <label>Nombre completo</label>
+                <input type="text" id="name" placeholder="Ej: Felipe A." required>
+            </div>
+            <div class="form-group">
+                <label>Servicio requerido</label>
+                <select id="service">
+                    <option value="Formateo">Formateo e Instalación</option>
+                    <option value="Limpieza">Limpieza y Pasta Térmica</option>
+                    <option value="Optimización">Optimización / Disco SSD</option>
+                    <option value="Otro">Otros problemas técnicos</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Contame qué le pasa al equipo</label>
+                <textarea id="message" rows="3" placeholder="Ej: No enciende, hace ruido..." required></textarea>
+            </div>
+            <button type="submit" class="btn-send">Enviar Solicitud</button>
+        </form>
+    </section>
 
-        function resize() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }
-        window.addEventListener('resize', resize);
-        resize();
+    <div class="info-footer">
+        <p>Email: feloaiza@outlook.com | WhatsApp: +54 11 66232997</p>
+        <p>© 2026 Felipe Soluciones IT - Buenos Aires</p>
+    </div>
+</div>
 
-        class Particle {
-            constructor() {
-                this.reset();
-            }
-            reset() {
-                this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height;
-                this.vx = (Math.random() - 0.5) * 0.4;
-                this.vy = (Math.random() - 0.5) * 0.4;
-                this.size = Math.random() * 2;
-            }
-            update() {
-                this.x += this.vx;
-                this.y += this.vy;
-                if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
-                if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
-            }
-            draw() {
-                ctx.fillStyle = 'rgba(255, 255, 255, 0.3)';
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fill();
-            }
-        }
+<script>
+    document.getElementById('serviceForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const name = document.getElementById('name').value;
+        const service = document.getElementById('service').value;
+        const msg = document.getElementById('message').value;
+        
+        // Configuración de contacto
+        const whatsappNum = "5491166232997"; 
+        
+        // Construir mensaje para WhatsApp
+        const texto = `¡Hola Felipe! Mi nombre es ${name}. Necesito presupuesto por: *${service}*. Detalle: ${msg}`;
+        const finalUrl = `https://wa.me/${whatsappNum}?text=${encodeURIComponent(texto)}`;
+        
+        window.open(finalUrl, '_blank');
+    });
+</script>
 
-        for (let i = 0; i < 60; i++) particles.push(new Particle());
-
-        function animate() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            particles.forEach(p => {
-                p.update();
-                p.draw();
-            });
-            requestAnimationFrame(animate);
-        }
-        animate();
-
-        // 2. Animación de entrada Staggered para las opciones
-        document.querySelectorAll('.option').forEach((el, index) => {
-            setTimeout(() => {
-                el.style.opacity = "1";
-                el.style.transform = "translateY(0)";
-            }, 150 * (index + 1));
-        });
-    </script>
 </body>
 </html>
