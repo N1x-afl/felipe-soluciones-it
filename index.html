@@ -24,6 +24,7 @@
             overflow-x: hidden;
         }
 
+        /* --- FONDO DE PARTÍCULAS DORADAS --- */
         #particles-canvas {
             position: fixed;
             top: 0; left: 0;
@@ -40,6 +41,7 @@
             z-index: 10; 
         }
 
+        /* --- NOTEBOOK 3D (Efecto apertura) --- */
         .laptop-container {
             perspective: 1000px;
             margin-bottom: 20px;
@@ -60,6 +62,7 @@
 
         header { text-align: center; margin-bottom: 60px; }
         
+        /* --- TÍTULO ZOOM IN --- */
         .hero-title { 
             font-size: clamp(2.2rem, 8vw, 3.8rem);
             background: linear-gradient(to right, #fff, var(--accent));
@@ -77,6 +80,7 @@
             100% { transform: scale(1) translateZ(0); opacity: 1; filter: blur(0); }
         }
 
+        /* --- SERVICIOS --- */
         .services {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -101,8 +105,12 @@
         }
 
         .btn-anydesk { border: 1px solid var(--anydesk-red); background: rgba(239, 68, 68, 0.1); }
-        .btn-rustdesk { border: 1px solid var(--rustdesk-blue); background: rgba(59, 130, 246, 0.1); }
+        .btn-anydesk:hover { background: var(--anydesk-red); }
 
+        .btn-rustdesk { border: 1px solid var(--rustdesk-blue); background: rgba(59, 130, 246, 0.1); }
+        .btn-rustdesk:hover { background: var(--rustdesk-blue); }
+
+        /* --- FORMULARIO --- */
         .contact-box {
             background: rgba(255,255,255,0.02);
             border: 1px solid rgba(255,255,255,0.1);
@@ -122,29 +130,12 @@
             margin-top: 25px; cursor: pointer; text-transform: uppercase;
         }
 
-        /* ESTILO DEL MENSAJE DE ÉXITO */
         #form-status {
-            display: none;
-            margin-top: 20px;
-            padding: 15px;
-            border-radius: 12px;
-            text-align: center;
-            font-weight: 600;
+            display: none; margin-top: 20px; padding: 15px; border-radius: 12px; text-align: center; font-weight: 600;
         }
 
-        #form-status.success {
-            display: block;
-            background: rgba(40, 167, 69, 0.2);
-            border: 1px solid var(--success);
-            color: #afffaf;
-        }
-
-        #form-status.error {
-            display: block;
-            background: rgba(220, 53, 69, 0.2);
-            border: 1px solid #dc3545;
-            color: #ffafaf;
-        }
+        #form-status.success { display: block; background: rgba(40, 167, 69, 0.2); border: 1px solid var(--success); color: #afffaf; }
+        #form-status.error { display: block; background: rgba(220, 53, 69, 0.2); border: 1px solid #dc3545; color: #ffafaf; }
 
         .footer { text-align: center; margin-top: 50px; color: #666; font-size: 0.85rem; }
     </style>
@@ -170,7 +161,7 @@
         </div>
         <div class="card">
             <h3>💿 Formateo y Soft</h3>
-            <p>Windows 10/11, drivers y backup de datos.</p>
+            <p>Windows 10/11, drivers oficiales y backup seguro.</p>
         </div>
         <div class="card">
             <h3>🔧 Mantenimiento</h3>
@@ -179,7 +170,7 @@
     </div>
 
     <section class="contact-box">
-        <h2 style="text-align: center; margin-bottom: 20px;">Solicitar Presupuesto</h2>
+        <h2 style="text-align: center; margin-bottom: 20px;">Solicitar Presupuesto por Email</h2>
         <form id="serviceForm">
             <input type="text" name="nombre" placeholder="Tu nombre" required>
             <select name="servicio">
@@ -199,7 +190,7 @@
 </div>
 
 <script>
-    // Partículas doradas
+    // --- PARTÍCULAS DORADAS ---
     const canvas = document.getElementById('particles-canvas');
     const ctx = canvas.getContext('2d');
     let particles = [];
@@ -232,7 +223,7 @@
     }
     animate();
 
-    // ENVÍO POR AJAX (FORMULARIO)
+    // --- ENVÍO POR AJAX ---
     const form = document.getElementById("serviceForm");
     const status = document.getElementById("form-status");
     const btn = document.getElementById("submit-btn");
@@ -241,9 +232,7 @@
       event.preventDefault();
       btn.disabled = true;
       btn.innerText = "Enviando...";
-      
       const data = new FormData(event.target);
-      
       fetch("https://formspree.io/f/mpqdakpy", {
         method: "POST",
         body: data,
@@ -259,7 +248,7 @@
           status.innerHTML = "Hubo un error. Por favor, reintente.";
           status.className = "error";
         }
-      }).catch(error => {
+      }).catch(() => {
         status.innerHTML = "Error de conexión.";
         status.className = "error";
       });
@@ -277,6 +266,5 @@ s1.setAttribute('crossorigin','*');
 s0.parentNode.insertBefore(s1,s0);
 })();
 </script>
-
 </body>
 </html>
