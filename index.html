@@ -23,7 +23,6 @@
             overflow-x: hidden;
         }
 
-        /* FONDO DE PARTÍCULAS DORADAS */
         #particles-canvas {
             position: fixed;
             top: 0; left: 0;
@@ -71,7 +70,6 @@
             margin: 0;
         }
 
-        /* TARJETAS DE SERVICIO */
         .services {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -96,7 +94,6 @@
 
         .card h3 { color: var(--accent); margin-bottom: 10px; }
 
-        /* DISEÑO DE BOTONES DIFERENCIADOS */
         .download-links {
             display: flex;
             flex-direction: column;
@@ -119,33 +116,26 @@
             gap: 8px;
         }
 
-        .btn-anydesk {
-            background: rgba(239, 68, 68, 0.15);
-            border: 1px solid var(--anydesk-red);
-        }
+        .btn-anydesk { background: rgba(239, 68, 68, 0.15); border: 1px solid var(--anydesk-red); }
+        .btn-anydesk:hover { background: var(--anydesk-red); box-shadow: 0 0 15px rgba(239, 68, 68, 0.4); }
 
-        .btn-anydesk:hover {
-            background: var(--anydesk-red);
-            box-shadow: 0 0 15px rgba(239, 68, 68, 0.4);
-        }
+        .btn-rustdesk { background: rgba(59, 130, 246, 0.15); border: 1px solid var(--rustdesk-blue); }
+        .btn-rustdesk:hover { background: var(--rustdesk-blue); box-shadow: 0 0 15px rgba(59, 130, 246, 0.4); }
 
-        .btn-rustdesk {
-            background: rgba(59, 130, 246, 0.15);
-            border: 1px solid var(--rustdesk-blue);
-        }
-
-        .btn-rustdesk:hover {
-            background: var(--rustdesk-blue);
-            box-shadow: 0 0 15px rgba(59, 130, 246, 0.4);
-        }
-
-        /* FORMULARIO */
         .contact-box {
             background: rgba(255,255,255,0.02);
             border: 1px solid rgba(255,255,255,0.1);
             padding: 40px;
             border-radius: 25px;
             box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+        }
+
+        .nota-hardware {
+            font-size: 0.85rem;
+            color: #888;
+            margin-top: 15px;
+            font-style: italic;
+            text-align: center;
         }
 
         input, select, textarea {
@@ -195,26 +185,27 @@
         </div>
         <div class="card">
             <h3>💿 Formateo y Soft</h3>
-            <p>Windows 10/11, drivers oficiales y backup de datos seguro.</p>
+            <p>Instalación de Windows 10/11, drivers oficiales y backup de datos seguro.</p>
         </div>
         <div class="card">
-            <h3>🔧 Mantenimiento</h3>
-            <p>Limpieza profunda, cambio de pasta térmica y mejora con SSD.</p>
+            <h3>🔧 Upgrade y Mantenimiento</h3>
+            <p>Asesoría en compra e instalación de SSD y RAM. Limpieza profunda y cambio de pasta térmica.</p>
         </div>
     </div>
 
     <section class="contact-box">
-        <h2 style="text-align: center; margin-bottom: 10px; font-weight: 400;">Pedí tu <span style="color: var(--accent)">Presupuesto</span></h2>
+        <h2 style="text-align: center; margin-bottom: 10px; font-weight: 400;">Presupuesto <span style="color: var(--accent)">WhatsApp</span></h2>
         <form id="serviceForm">
             <input type="text" id="name" placeholder="Tu nombre" required>
             <select id="service">
                 <option value="Formateo e Instalacion">Formateo e Instalación de Sistema</option>
                 <option value="Soporte Remoto">Soporte Remoto urgente</option>
-                <option value="Mantenimiento Fisico">Mantenimiento Físico / Limpieza</option>
-                <option value="Upgrade Hardware">Upgrade de Disco SSD / RAM</option>
+                <option value="Limpieza y Mantenimiento">Limpieza Física / Pasta Térmica</option>
+                <option value="Asesoria y Upgrade Hardware">Upgrade de Disco SSD / RAM</option>
             </select>
             <textarea id="message" rows="3" placeholder="Contame qué problema tiene tu equipo..." required></textarea>
-            <button type="submit" class="btn-send">Enviar a WhatsApp</button>
+            <button type="submit" class="btn-send">Consultar Ahora</button>
+            <p class="nota-hardware">* Los repuestos se cotizan por separado según el modelo de tu equipo.</p>
         </form>
     </section>
 
