@@ -3,222 +3,233 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Felipe Soluciones IT | Soporte Técnico Profesional</title>
+    <title>Felipe Soluciones IT | Soporte Profesional</title>
     <style>
         :root {
             --accent: #ffb400; 
-            --bg: #0a0a0b;
+            --bg: #050505;
             --glass: rgba(255, 255, 255, 0.03);
-            --border: rgba(255, 180, 0, 0.3);
+            --border: rgba(255, 180, 0, 0.25);
         }
 
         body {
-            font-family: 'Segoe UI', system-ui, sans-serif;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
             background-color: var(--bg);
             color: #ffffff;
             margin: 0;
-            line-height: 1.6;
             overflow-x: hidden;
-            position: relative;
         }
 
-        /* --- EFECTO DE ONDAS ANIMADAS --- */
-        .waves-container {
+        /* --- EFECTO DE ONDAS --- */
+        .waves {
             position: fixed;
             width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            z-index: -1;
-            opacity: 0.4;
-        }
-
-        .wave {
-            position: absolute;
+            height: 15vh;
             bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 100px;
-            background: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/85486/wave.svg') repeat-x;
-            animation: move-wave 10s linear infinite;
+            z-index: -1;
+            opacity: 0.3;
         }
 
-        .wave1 { height: 120px; opacity: 0.3; animation-duration: 20s; }
-        .wave2 { height: 80px; opacity: 0.2; animation-duration: 15s; bottom: 10px; animation-direction: reverse; }
-
-        @keyframes move-wave {
-            0% { background-position-x: 0; }
-            100% { background-position-x: 1600px; }
-        }
-
-        .container { max-width: 900px; margin: 0 auto; padding: 40px 20px; position: relative; }
-
-        /* Encabezado */
-        header { text-align: center; margin-bottom: 50px; }
+        /* --- ANIMACIÓN DEL TÍTULO --- */
         .hero-title { 
-            font-size: 3rem; 
+            font-size: clamp(2rem, 8vw, 3.5rem);
             margin: 0; 
-            background: linear-gradient(to bottom, #fff 30%, var(--accent));
+            background: linear-gradient(to right, #fff, var(--accent));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             font-weight: 800;
             text-transform: uppercase;
+            /* Animación de entrada desde la derecha */
+            animation: slideInRight 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
         }
 
-        /* Grid de Servicios */
+        @keyframes slideInRight {
+            0% { transform: translateX(100px); opacity: 0; }
+            100% { transform: translateX(0); opacity: 1; }
+        }
+
+        .container { max-width: 900px; margin: 0 auto; padding: 60px 20px; }
+
+        header { text-align: center; margin-bottom: 60px; }
+
+        /* --- TARJETAS DE SERVICIO --- */
         .services {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-            margin-bottom: 60px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 50px;
         }
 
         .card {
             background: var(--glass);
             border: 1px solid var(--border);
-            border-radius: 15px;
-            padding: 25px;
-            transition: 0.4s;
-            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            backdrop-filter: blur(12px);
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
         .card:hover {
             border-color: var(--accent);
-            transform: translateY(-5px);
-            box-shadow: 0 0 20px rgba(255, 180, 0, 0.2);
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(255, 180, 0, 0.1);
         }
 
-        .card h3 { color: var(--accent); margin-top: 0; font-size: 1.3rem; }
-        .card p { font-size: 0.95rem; color: #ccc; }
-        .badge { background: rgba(255,255,255,0.1); padding: 4px 8px; border-radius: 5px; font-size: 0.8rem; border: 1px solid rgba(255,255,255,0.2); margin-right: 5px; }
+        .card h3 { color: var(--accent); margin-bottom: 15px; }
 
-        /* Formulario */
-        .contact-box {
-            background: linear-gradient(145deg, rgba(255,255,255,0.05), rgba(0,0,0,0));
+        /* --- BOTONES DE DESCARGA REMOTA --- */
+        .download-links {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+
+        .btn-download {
+            flex: 1;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: 0.3s;
             border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 20px;
-            padding: 40px;
-            backdrop-filter: blur(5px);
+            color: white;
+            background: rgba(255,255,255,0.05);
         }
 
-        .form-group { margin-bottom: 20px; }
-        label { display: block; margin-bottom: 8px; font-weight: 600; color: var(--accent); }
-        
+        .btn-download:hover {
+            background: rgba(255,255,255,0.15);
+            border-color: white;
+        }
+
+        /* --- FORMULARIO --- */
+        .contact-box {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 24px;
+            padding: 40px;
+        }
+
         input, select, textarea {
             width: 100%;
-            padding: 14px;
-            background: rgba(0,0,0,0.5);
+            padding: 15px;
+            margin-top: 8px;
+            background: #000;
             border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 10px;
+            border-radius: 12px;
             color: white;
-            font-size: 1rem;
+            transition: 0.3s;
         }
+
+        input:focus { border-color: var(--accent); outline: none; }
 
         .btn-send {
             background: var(--accent);
             color: #000;
             border: none;
-            padding: 16px;
+            padding: 18px;
             width: 100%;
-            border-radius: 10px;
-            font-weight: 700;
-            font-size: 1.1rem;
+            border-radius: 12px;
+            font-weight: 800;
             cursor: pointer;
-            transition: 0.3s;
+            margin-top: 20px;
             text-transform: uppercase;
         }
 
-        .btn-send:hover {
-            filter: brightness(1.2);
-            box-shadow: 0 0 25px rgba(255, 180, 0, 0.4);
-        }
+        .btn-send:hover { filter: brightness(1.2); transform: scale(1.01); }
 
-        .info-footer {
-            text-align: center;
-            margin-top: 30px;
-            color: #888;
-            font-size: 0.9rem;
-        }
+        .footer { text-align: center; margin-top: 40px; color: #555; font-size: 0.9rem; }
 
-        @media (max-width: 600px) {
-            .hero-title { font-size: 2.2rem; }
-            .contact-box { padding: 25px; }
-        }
     </style>
 </head>
 <body>
 
-<div class="waves-container">
-    <div class="wave wave1"></div>
-    <div class="wave wave2"></div>
-</div>
-
 <div class="container">
     <header>
         <h1 class="hero-title">Felipe Soluciones IT</h1>
-        <p>Servicio Técnico Profesional | Buenos Aires</p>
+        <p style="color: #888; margin-top: 10px;">Soporte Técnico Profesional | Buenos Aires</p>
     </header>
 
     <div class="services">
         <div class="card">
-            <h3>🖥️ Mantenimiento y Soft</h3>
-            <p>Formateo, instalación de Windows, limpieza física y cambio de pasta térmica.</p>
-        </div>
-        <div class="card">
             <h3>⚡ Asistencia Remota</h3>
-            <p>Soluciones rápidas sin moverte de tu casa. Configuración de software y optimización.</p>
-            <div style="margin-top: 10px;">
-                <span class="badge">RustDesk</span>
-                <span class="badge">AnyDesk</span>
+            <p style="color: #ccc; font-size: 0.9rem;">Resolución de problemas de software y optimización al instante. Descargá el software necesario aquí:</p>
+            <div class="download-links">
+                <a href="https://rustdesk.com/download" target="_blank" class="btn-download">⬇️ RustDesk</a>
+                <a href="https://anydesk.com/es/downloads/windows" target="_blank" class="btn-download">⬇️ AnyDesk</a>
             </div>
         </div>
+
         <div class="card">
-            <h3>🚀 Hardware Upgrade</h3>
-            <p>Instalación de discos SSD y ampliación de memoria RAM para notebooks y PC.</p>
+            <h3>🛠️ Mantenimiento y Hardware</h3>
+            <p style="color: #ccc; font-size: 0.9rem;">Formateo, limpieza interna y cambio de componentes. Dejá tu notebook como nueva.</p>
         </div>
     </div>
 
     <section class="contact-box">
-        <h2 style="text-align: center; margin-bottom: 30px;">Pedí tu presupuesto</h2>
+        <h2 style="text-align: center; margin-bottom: 30px; font-weight: 300;">Solicitá tu <span style="color: var(--accent);">presupuesto</span></h2>
         <form id="serviceForm">
-            <div class="form-group">
-                <label>Nombre</label>
+            <div style="margin-bottom: 20px;">
+                <label style="font-size: 0.9rem; color: var(--accent);">Nombre</label>
                 <input type="text" id="name" placeholder="Tu nombre" required>
             </div>
-            <div class="form-group">
-                <label>¿Qué servicio necesitás?</label>
+            <div style="margin-bottom: 20px;">
+                <label style="font-size: 0.9rem; color: var(--accent);">¿En qué puedo ayudarte?</label>
                 <select id="service">
-                    <option value="Soporte Remoto">Soporte Remoto (AnyDesk/RustDesk)</option>
-                    <option value="Formateo">Formateo e Instalación</option>
-                    <option value="Limpieza">Limpieza y Pasta Térmica</option>
-                    <option value="Hardware">Upgrade de Hardware</option>
+                    <option value="Soporte Remoto">Soporte Remoto urgente</option>
+                    <option value="Limpieza/Mantenimiento">Mantenimiento físico / Formateo</option>
+                    <option value="Cambio de Disco/RAM">Upgrade de Hardware</option>
                 </select>
             </div>
-            <div class="form-group">
-                <label>Detalle del problema</label>
-                <textarea id="message" rows="3" placeholder="Ej: La notebook no conecta a WiFi..." required></textarea>
+            <div style="margin-bottom: 20px;">
+                <label style="font-size: 0.9rem; color: var(--accent);">Detalles adicionales</label>
+                <textarea id="message" rows="3" placeholder="Ej: Mi notebook calienta mucho..." required></textarea>
             </div>
-            <button type="submit" class="btn-send">Enviar WhatsApp</button>
+            <button type="submit" class="btn-send">Enviar a WhatsApp</button>
         </form>
     </section>
 
-    <div class="info-footer">
-        <p>Email: feloaiza@outlook.com | WhatsApp: +54 11 66232997</p>
+    <div class="footer">
+        <p>Email: feloaiza@outlook.com | Tel: +54 11 66232997</p>
         <p>© 2026 Felipe Soluciones IT</p>
     </div>
 </div>
 
+<svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+<defs>
+<path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+</defs>
+<g class="parallax">
+<use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(255,180,0,0.1)" />
+<use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(255,180,0,0.05)" />
+</g>
+</svg>
+
+<style>
+.parallax > use {
+  animation: move-forever 25s cubic-bezier(.55,.5,.45,.5)     infinite;
+}
+.parallax > use:nth-child(1) { animation-delay: -2s; animation-duration: 7s; }
+.parallax > use:nth-child(2) { animation-delay: -3s; animation-duration: 10s; }
+@keyframes move-forever {
+  0% { transform: translate3d(-90px,0,0); }
+  100% { transform: translate3d(85px,0,0); }
+}
+</style>
+
 <script>
     document.getElementById('serviceForm').addEventListener('submit', function(e) {
         e.preventDefault();
-        
         const name = document.getElementById('name').value;
         const service = document.getElementById('service').value;
         const msg = document.getElementById('message').value;
-        
         const whatsappNum = "5491166232997"; 
-        const texto = `¡Hola Felipe! Mi nombre es ${name}. Consulto por servicio de: *${service}*. Detalle: ${msg}`;
-        
+        const texto = `¡Hola Felipe! Soy ${name}. Consulto por: *${service}*. Detalle: ${msg}`;
         window.open(`https://wa.me/${whatsappNum}?text=${encodeURIComponent(texto)}`, '_blank');
     });
 </script>
