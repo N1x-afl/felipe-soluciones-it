@@ -24,7 +24,6 @@
             overflow-x: hidden;
         }
 
-        /* --- FONDO DE PARTÍCULAS DORADAS --- */
         #particles-canvas {
             position: fixed;
             top: 0; left: 0;
@@ -50,7 +49,6 @@
             margin-bottom: 30px; 
         }
 
-        /* --- NOTEBOOK 3D --- */
         .laptop-container {
             perspective: 1000px;
             margin-bottom: 20px;
@@ -68,7 +66,6 @@
             100% { transform: rotateX(0deg) rotateY(5deg); }
         }
 
-        /* --- TÍTULO CON EFECTO ZOOM IN --- */
         .hero-title { 
             font-size: clamp(2rem, 7vw, 3.5rem);
             background: linear-gradient(to right, #fff, var(--accent));
@@ -85,7 +82,6 @@
             100% { transform: scale(1); opacity: 1; filter: blur(0); }
         }
 
-        /* --- SECCIÓN DE PERFIL --- */
         .profile-section {
             display: flex;
             align-items: center;
@@ -120,7 +116,6 @@
             line-height: 1.6;
         }
 
-        /* --- CARDS SERVICIOS --- */
         .services {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -146,10 +141,7 @@
 
         .btn-anydesk { border: 1px solid var(--anydesk-red); background: rgba(239, 68, 68, 0.1); }
         .btn-rustdesk { border: 1px solid var(--rustdesk-blue); background: rgba(59, 130, 246, 0.1); }
-        .btn-anydesk:hover { background: var(--anydesk-red); }
-        .btn-rustdesk:hover { background: var(--rustdesk-blue); }
 
-        /* --- TARIFAS --- */
         .pricing-section { margin-bottom: 50px; }
         
         .pricing-table-wrapper {
@@ -184,7 +176,6 @@
             line-height: 1.4;
         }
 
-        /* --- FORMULARIO --- */
         .contact-box {
             background: rgba(255,255,255,0.02);
             border: 1px solid rgba(255,255,255,0.1);
@@ -243,11 +234,11 @@
         </div>
         <div class="card">
             <h3>💿 Software</h3>
-            <p>Optimización, limpieza de virus y puesta a punto de sistemas operativos.</p>
+            <p>Optimización de sistemas, limpieza de virus y puesta a punto general.</p>
         </div>
         <div class="card">
             <h3>🔧 Mantenimiento</h3>
-            <p>Limpieza física profunda, cambio de pasta térmica y mejoras de hardware.</p>
+            <p>Limpieza física profunda, pasta térmica y upgrades de hardware.</p>
         </div>
     </div>
 
@@ -258,7 +249,7 @@
                 <thead>
                     <tr>
                         <th>Servicio</th>
-                        <th>Equipo Sugerido</th>
+                        <th>Equipo</th>
                         <th>Costo Mano de Obra</th>
                     </tr>
                 </thead>
@@ -266,13 +257,13 @@
                     <tr><td>Diagnóstico / Revisión</td><td>PC-Notebook</td><td class="price-tag">$14.500</td></tr>
                     <tr><td>Formateo e Inst. SO (Sin Backup)</td><td>PC-Notebook-AIO</td><td class="price-tag">$50.000</td></tr>
                     <tr><td>Full: Limpieza + Formateo + SSD + Backup 100GB</td><td>PC-Notebook-AIO</td><td class="price-tag">$58.000</td></tr>
-                    <tr><td>Limpieza Hardware + Pasta Térmica</td><td>Notebook-AIO</td><td class="price-tag">$30.000</td></tr>
+                    <tr><td>Limpieza Hardware + Pasta Térmica</td><td>Notebook-AIO-Consolas</td><td class="price-tag">$30.000</td></tr>
                     <tr><td>Soporte Remoto (1 Hora)</td><td>PC-Notebook-AIO</td><td class="price-tag">$11.000</td></tr>
                     <tr><td>Backup Extra (Cada 100GB)</td><td>PC-Notebook-AIO</td><td class="price-tag">$14.500</td></tr>
                 </tbody>
             </table>
         </div>
-        <p class="nota-importante">⚠️ Los valores indicados corresponden únicamente a la mano de obra. Repuestos e insumos se cotizan por separado.</p>
+        <p class="nota-importante">⚠️ Los valores corresponden a mano de obra. Los repuestos se cotizan por separado.</p>
     </section>
 
     <section class="contact-box">
@@ -286,9 +277,8 @@
                 <option value="Mantenimiento">Mantenimiento Físico</option>
                 <option value="Remoto">Soporte Remoto</option>
             </select>
-            <textarea name="mensaje" rows="3" placeholder="Comentame el problema de tu equipo..." required></textarea>
+            <textarea name="mensaje" rows="3" placeholder="Detalle del problema..." required></textarea>
             <button type="submit" class="btn-send" id="submit-btn">Solicitar Presupuesto</button>
-            <p style="font-size: 0.75rem; color: #777; margin-top: 10px; text-align: center;">* Al enviar confirmás que el hardware necesario corre por cuenta del cliente.</p>
         </form>
         <div id="form-status"></div>
     </section>
@@ -299,7 +289,6 @@
 </div>
 
 <script>
-    // --- MOTOR DE PARTÍCULAS DORADAS ---
     const canvas = document.getElementById('particles-canvas');
     const ctx = canvas.getContext('2d');
     let particles = [];
@@ -331,7 +320,6 @@
     window.addEventListener('resize', init);
     init(); animate();
 
-    // --- ENVÍO POR AJAX (Formspree) ---
     const form = document.getElementById("serviceForm");
     const status = document.getElementById("form-status");
     const btn = document.getElementById("submit-btn");
@@ -344,10 +332,10 @@
         method: "POST", body: data, headers: { 'Accept': 'application/json' }
       }).then(response => {
         if (response.ok) {
-          status.innerHTML = "¡Consulta enviada! Te contactaré al WhatsApp a la brevedad.";
+          status.innerHTML = "¡Consulta enviada! Te contactaré a la brevedad.";
           status.className = "success"; form.reset();
         } else {
-          status.innerHTML = "Error al enviar. Por favor usá el chat en vivo.";
+          status.innerHTML = "Error al enviar.";
           status.className = "error";
         }
         btn.disabled = false; btn.innerText = "Solicitar Presupuesto";
